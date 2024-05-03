@@ -16,6 +16,7 @@ public class Comands {
     private FileRead fileRead;
     private final Set<String> scriptNames;
     private boolean isScriptExecuting;
+    private WriteFileToXML writeFileToXML;
 
     public Comands(Set<Vehicle> vehicles, FileRead reader,  WriteFileToXML writeFileToXML){
         this.methods = Comands.class.getMethods();
@@ -29,7 +30,7 @@ public class Comands {
         this.fileRead = reader;
         this.isScriptExecuting = false;
         scriptNames = new HashSet<>();
-
+        this.writeFileToXML = writeFileToXML;
     }
     public void exit() {
         System.out.println("Завершение программы...");
