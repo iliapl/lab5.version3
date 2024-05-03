@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Creatore {
     public Scanner scanner;
     public Comands comands;
+    public VehiclesCollecton vehiclesCollecton;
 
     public Creatore() {
 
@@ -43,11 +44,9 @@ public class Creatore {
             }
         }
         PrintWriter printWriter = new PrintWriter(fileOutputStream);
-         VehiclesCollecton vehiclesCollecton = new VehiclesCollecton();
         FileRead fileRead = new FileRead(bufferedReader, scanner, file);
-        vehiclesCollecton.setVehicles(fileRead.parserXML());
-
+        vehiclesCollecton = new VehiclesCollecton(fileRead.parserXML());
         WriteFileToXML writeFileToXML = new WriteFileToXML(printWriter, vehiclesCollecton);
-        comands = new Comands(vehiclesCollecton.getVehicles(), fileRead, writeFileToXML);
+        comands = new Comands(vehiclesCollecton, fileRead, writeFileToXML);
     }
 }

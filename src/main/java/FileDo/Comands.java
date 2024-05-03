@@ -2,6 +2,7 @@ package FileDo;
 
 import toVehicle.FuelType;
 import toVehicle.Vehicle;
+import toVehicle.VehiclesCollecton;
 import util.FileRead;
 import util.WriteFileToXML;
 
@@ -23,20 +24,23 @@ public class Comands {
     private Deque<String> commandHistory;
     private final int maxHistorySize = 7;
     private WriteFileToXML writeFileToXML;
+    private VehiclesCollecton vehiclesCollecton;
 
-    public Comands(Set<Vehicle> vehicles, FileRead reader, WriteFileToXML writeFileToXML) {
+    public Comands(VehiclesCollecton vehiclesCollecton, FileRead reader, WriteFileToXML writeFileToXML) {
         this.methods = Comands.class.getMethods();
         creationDate = java.time.ZonedDateTime.now();
-        if (vehicles == null) {
+        if (vehiclesCollecton.getVehicles() == null) {
             this.vehicles = new HashSet<>();
         } else {
-            this.vehicles = vehicles;
-            this.vehicles.addAll(vehicles);
+            this.vehicles = vehiclesCollecton.getVehicles();
+            this.vehicles.addAll(vehiclesCollecton.getVehicles());
         }
         this.fileRead = reader;
         this.isScriptExecuting = false;
         scriptNames = new HashSet<>();
         this.commandHistory = new LinkedList<>();
+        this.writeFileToXML = writeFileToXML;
+        this.vehiclesCollecton = vehiclesCollecton;
     }
 
     public void help() {

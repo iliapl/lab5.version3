@@ -6,7 +6,7 @@ public class VehiclesCollecton {
 
     private HashSet<Vehicle> vehicles;
 
-    public void setVehicles(HashSet<Vehicle> vehicles) {
+    public VehiclesCollecton(HashSet<Vehicle> vehicles) {
         this.vehicles = vehicles;
         this.vehicles.addAll(vehicles);
     }

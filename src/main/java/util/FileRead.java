@@ -45,6 +45,7 @@ public class FileRead {
 
     public HashSet<Vehicle> parserXML() {
         if (canReadElements()) {
+            HashSet<Vehicle> vehicles = new HashSet<>(); //наш исходный хашс он здесь объявл впервые
             long id = 0;
             String name = null;
             Coordinates coordinates = null;
@@ -137,12 +138,11 @@ public class FileRead {
                         */
                     }
                 }
+                Vehicle vehicle = new Vehicle(name, coordinates, enginePower, type, fuelType);
+                vehicle.setId((int) id);
+                vehicle.setCreationDate(creationDate);
+                vehicles.add(vehicle);
             }
-            Vehicle vehicle = new Vehicle(name, coordinates, enginePower, type, fuelType);
-            vehicle.setId((int) id);
-            vehicle.setCreationDate(creationDate);
-            HashSet<Vehicle> vehicles = new HashSet<>(); //наш исходный хашс он здесь объявл впервые
-            vehicles.add(vehicle);
             return vehicles;
         } else {
             System.out.println("Пожалуйста создадите новый объект");
@@ -198,7 +198,8 @@ public class FileRead {
 
     public Coordinates readCordinatesFromConsole() {
         System.out.println("Введите координату х");
-        long x = scanner.nextLong();
+        String string = scanner.nextLine();
+        long x = Long.parseLong(string);
         System.out.println("Введите координату y (должна быть < 597)");
         Float y = scanner.nextFloat();
         while (y == 0 || y > 597) {
@@ -211,6 +212,7 @@ public class FileRead {
     public int readEnginePowerFromConsole() {
         int enginePower;
         System.out.println("Введите значение enginePower");
+        String string = scanner.nextLine();
         enginePower = scanner.nextInt();
         if (enginePower <= 0) {
             System.out.println("значение enginePower должно быть польше нуля, повторите попытку");
