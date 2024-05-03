@@ -6,12 +6,30 @@ import util.WriteFileToXML;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Comands {
     private final Method[] methods;
+    private final Set<Vehicle> vehicles;
+    private final java.time.ZonedDateTime creationDate;
+    private FileRead fileRead;
+    private final Set<String> scriptNames;
+    private boolean isScriptExecuting;
+
     public Comands(Set<Vehicle> vehicles, FileRead reader,  WriteFileToXML writeFileToXML){
         this.methods = Comands.class.getMethods();
+        creationDate = java.time.ZonedDateTime.now();
+        if (vehicles == null) {
+            this.vehicles = new HashSet<>();
+        } else {
+            this.vehicles = vehicles;
+            this.vehicles.addAll(vehicles);
+        }
+        this.fileRead = reader;
+        this.isScriptExecuting = false;
+        scriptNames = new HashSet<>();
+
     }
     public void exit() {
         System.out.println("Завершение программы...");

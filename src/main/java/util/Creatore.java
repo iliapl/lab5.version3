@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Creatore {
     public Scanner scanner;
     public Comands comands;
+
     public Creatore() {
 
     }
