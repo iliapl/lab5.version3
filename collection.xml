@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Vehicles>
+    <Vehicle>
+        <id>12</id>
+        <name>paul</name>
+        <coordinates>
+            <x>0</x>
+            <y>1</y>
+        </coordinates>
+        <time>8</time>
+        <enginePower>1</enginePower>
+        <type>SHIP</type>
+        <fuelType>DIESEL</fuelType>
+    </Vehicle>
+</Vehicles>
