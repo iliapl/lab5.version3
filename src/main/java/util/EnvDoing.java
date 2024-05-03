@@ -15,7 +15,7 @@ public class EnvDoing {
         }
 
          */
-            return System.getenv("VehicleCollection");
+            return "/Users/ahahac_be3_xboctuka/IdeaProjects/lab5.version3/collection.xml";
         }
 
 }

@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import toVehicle.*;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedInputStream;
@@ -20,12 +21,14 @@ public class FileRead {
     Scanner scanner;
     BufferedInputStream bufferedReaderin;
     public File file;
+
     public FileRead(BufferedInputStream bufferedReader, Scanner scanner, File file) {
         this.bufferedReaderin = bufferedReader;
         this.file = file;
         this.scanner = scanner;
         filewas = new Filewas();
     }
+
     public boolean canReadElements() {
         if (filewas.canReadFile(file)) {
             if (getFirstNode() != null) {
@@ -39,6 +42,7 @@ public class FileRead {
             return false;
         }
     }
+
     public HashSet<Vehicle> parserXML() {
         if (canReadElements()) {
             long id = 0;
@@ -84,7 +88,7 @@ public class FileRead {
                                 fuelType = FuelType.valueOf(elements.item(co).getTextContent());
                                 break;
                             }
-                            case "coordinates":{
+                            case "coordinates": {
                                 NodeList nodeCoordinates = elements.item(co).getChildNodes();
                                 long x = 0;
                                 float y = 0;
@@ -102,7 +106,7 @@ public class FileRead {
                                         }
                                     }
                                 }
-                                coordinates = new Coordinates(x,y);
+                                coordinates = new Coordinates(x, y);
                                 break;
                             }
                         }
@@ -140,14 +144,14 @@ public class FileRead {
             HashSet<Vehicle> vehicles = new HashSet<>(); //наш исходный хашс он здесь объявл впервые
             vehicles.add(vehicle);
             return vehicles;
-        }
-        else {
+        } else {
             System.out.println("Пожалуйста создадите новый объект");
             HashSet<Vehicle> vehicles = new HashSet<>(); //наш исходный хашс он здесь объявл впервые
             vehicles.add(readVehicleFromConsole());
             return vehicles;
         }
     }
+
     public Document buildDocument() throws SAXException, IOException, ParserConfigurationException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         return docFactory.newDocumentBuilder().parse(file);
@@ -166,6 +170,7 @@ public class FileRead {
     public NodeList getNodes() {
         return getFirstNode().getChildNodes();
     }
+
     public boolean canRead() throws IOException {
         if (bufferedReaderin.available() != 0) {
             System.out.println("Файл может быть прочитан");
@@ -192,15 +197,12 @@ public class FileRead {
     }
 
     public Coordinates readCordinatesFromConsole() {
-        Coordinates coordinates;
-        long x;
-        System.out.println("Введите координату (х)");
-        String string = scanner.nextLine();
-        x = Long.parseLong(string);
-        System.out.println("Введите координату (y), она должна быть < 597");
+        System.out.println("Введите координату х");
+        long x = scanner.nextLong();
+        System.out.println("Введите координату y (должна быть < 597)");
         Float y = scanner.nextFloat();
         while (y == 0 || y > 597) {
-            System.out.println("Вы не ввели координату, повторите попытку, (y), должна быть < 597 и не равна 0");
+            System.out.println("Вы не ввели координату, повторите попытку, y должна быть < 597");
             y = scanner.nextFloat();
         }
         return new Coordinates(x, y);
@@ -209,8 +211,7 @@ public class FileRead {
     public int readEnginePowerFromConsole() {
         int enginePower;
         System.out.println("Введите значение enginePower");
-        String string = scanner.nextLine();
-        enginePower = Integer.parseInt(string);
+        enginePower = scanner.nextInt();
         if (enginePower <= 0) {
             System.out.println("значение enginePower должно быть польше нуля, повторите попытку");
             return readEnginePowerFromConsole();
@@ -219,45 +220,57 @@ public class FileRead {
         }
     }
 
-    //id само создаётся
-
     public VehicleType readVehicleTypeFromConsole() {
-        System.out.println("Тип машины и её номер");
-        int number = 0;
-        VehicleType[] types = new VehicleType[VehicleType.values().length];
-        for (VehicleType vehicleType : VehicleType.values()) {
-            types[number] = vehicleType;
-            System.out.println(number + " " + vehicleType);
-            number++;
+        VehicleType[] types = VehicleType.values();
+        System.out.println("Выберите тип транспорта:");
+
+        for (int i = 0; i < types.length; i++) {
+            System.out.println(i + " - " + types[i]);
         }
-        System.out.println("напишите номер варианта");
-        int inputnomber = scanner.nextInt();
-        if (inputnomber > number || inputnomber <= 0) {
-            System.out.println("Вы ввели несуществующий номер, повторите попытку");
-            System.out.println("Напоминаем");
-            return readVehicleTypeFromConsole();
-        } else {
-            return types[inputnomber];
+
+        while (true) {
+            System.out.print("Введите номер варианта: ");
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) {
+                System.out.println("Ввод не должен быть пустым. Попробуйте снова.");
+                continue;
+            }
+
+            try {
+                int choice = Integer.parseInt(input);
+                if (choice >= 0 && choice < types.length) {
+                    return types[choice];
+                } else {
+                    System.out.println("Неверный выбор. Попробуйте снова.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Некорректный формат. Введите число, соответствующее типу транспорта.");
+            }
         }
     }
 
     public FuelType readFuelTypeFromConsole() {
-        System.out.println("Тип машины и её номер");
-        int nomber = 0;
-        FuelType[] types = new FuelType[VehicleType.values().length];
-        for (FuelType fuelType : FuelType.values()) {
-            types[nomber] = fuelType;
-            System.out.println(nomber + " " + fuelType);
-            nomber++;
+        FuelType[] fuelTypes = FuelType.values();
+        System.out.println("Выберите тип топлива:");
+
+        for (int i = 0; i < fuelTypes.length; i++) {
+            System.out.println(i + " - " + fuelTypes[i]);
         }
-        System.out.println("напишите номер варианта");
-        int inputnomber = scanner.nextInt();
-        if (inputnomber > nomber || inputnomber <= 0) {
-            System.out.println("Вы ввели несуществующий номер, повторите попытку");
-            System.out.println("Напоминаем");
-            return readFuelTypeFromConsole();
-        } else {
-            return types[inputnomber];
+
+        while (true) {
+            System.out.print("Введите номер варианта: ");
+            String input = scanner.nextLine().trim();
+            try {
+                int choice = Integer.parseInt(input);
+                if (choice >= 0 && choice < fuelTypes.length) {
+                    return fuelTypes[choice];
+                } else {
+                    System.out.println("Неверный выбор. Попробуйте снова.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Некорректный формат ввода. Введите число, соответствующее типу топлива.");
+            }
         }
     }
 
