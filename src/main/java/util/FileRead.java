@@ -260,4 +260,5 @@ public class FileRead {
             return types[inputnomber];
         }
     }
+
 }

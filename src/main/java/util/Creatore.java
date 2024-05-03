@@ -37,7 +37,7 @@ public class Creatore {
 
         {
             try {
-                fileOutputStream = new FileOutputStream(string, true);
+                fileOutputStream = new FileOutputStream(file, true);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
