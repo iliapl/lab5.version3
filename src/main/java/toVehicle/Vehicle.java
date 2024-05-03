@@ -108,5 +108,4 @@ public class Vehicle implements Serializable {
                 ", Type: " + type +
                 ", Fuel Type: " + fuelType;
     }
-
 }

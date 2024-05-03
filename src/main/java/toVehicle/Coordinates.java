@@ -13,19 +13,16 @@ public class Coordinates {
         }
     }
 
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public void setX(long x) {
-        this.x = x;
-    }
-
     public float getY() {
         return y;
     }
 
     public long getX() {
         return x;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("x = %d, y = %.2f", x, y);
     }
 }
