@@ -8,9 +8,15 @@ import util.WriteFileToXML;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,8 +31,9 @@ public class Comands {
     private final int maxHistorySize = 7;
     private WriteFileToXML writeFileToXML;
     private VehiclesCollecton vehiclesCollecton;
+    String path;
 
-    public Comands(VehiclesCollecton vehiclesCollecton, FileRead reader, WriteFileToXML writeFileToXML) {
+    public Comands(VehiclesCollecton vehiclesCollecton, FileRead reader, WriteFileToXML writeFileToXML, File file) {
         this.methods = Comands.class.getMethods();
         creationDate = java.time.ZonedDateTime.now();
         if (vehiclesCollecton.getVehicles() == null) {
@@ -41,6 +48,7 @@ public class Comands {
         this.commandHistory = new LinkedList<>();
         this.writeFileToXML = writeFileToXML;
         this.vehiclesCollecton = vehiclesCollecton;
+        path = file.getAbsolutePath();
     }
 
     public void help() {
@@ -150,6 +158,7 @@ public class Comands {
                 System.out.println("Коллекция пуста, нечего сохранять.");
                 return;
             }
+            Files.newBufferedWriter(Path.of(path) , StandardOpenOption.TRUNCATE_EXISTING);
             writeFileToXML.toSaveToXML();
             System.out.println("Коллекция успешно сохранена.");
         } catch (ParserConfigurationException e) {

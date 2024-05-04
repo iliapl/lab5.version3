@@ -47,6 +47,6 @@ public class Creatore {
         FileRead fileRead = new FileRead(bufferedReader, scanner, file);
         vehiclesCollecton = new VehiclesCollecton(fileRead.parserXML());
         WriteFileToXML writeFileToXML = new WriteFileToXML(printWriter, vehiclesCollecton);
-        comands = new Comands(vehiclesCollecton, fileRead, writeFileToXML);
+        comands = new Comands(vehiclesCollecton, fileRead, writeFileToXML, file);
     }
 }
