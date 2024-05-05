@@ -7,7 +7,6 @@ import util.FileRead;
 import util.WriteFileToXML;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,11 +22,11 @@ public class Comands {
     private final java.time.ZonedDateTime creationDate;
     private final FileRead fileRead;
     private final Set<String> scriptNames;
-    private boolean isScriptExecuting;
-    private Deque<String> commandHistory;
+    private final boolean isScriptExecuting;
+    private final Deque<String> commandHistory;
     private final int maxHistorySize = 7;
-    private WriteFileToXML writeFileToXML;
-    private VehiclesCollecton vehiclesCollecton;
+    private final WriteFileToXML writeFileToXML;
+    private final VehiclesCollecton vehiclesCollecton;
     String path;
 
     public Comands(VehiclesCollecton vehiclesCollecton, FileRead reader, WriteFileToXML writeFileToXML, File file) {
@@ -104,7 +103,6 @@ public class Comands {
                     break;
                 }
             }
-
             if (vehicleToUpdate == null) {
                 System.out.println("Элемент с ID " + id + " не найден.");
                 return;
@@ -140,7 +138,6 @@ public class Comands {
             System.out.println("Коллекция уже пустая, нечего очищать.");
             return;
         }
-
         try {
             vehicles.clear();
             System.out.println("Коллекция была успешно очищена.");
@@ -164,7 +161,6 @@ public class Comands {
             System.out.println("Произошла неизвестная ошибка при сохранении: " + e.getMessage());
         }
     }
-
 
     public void executeScriptFileName(String fileFullName) {
         try {
@@ -227,12 +223,11 @@ public class Comands {
         }
     }
 
-    public void history() { //в истории даже несуществующие команды (плохо или нет)
+    public void history() {
         if (commandHistory.isEmpty()) {
             System.out.println("История команд пуста.");
             return;
         }
-
         System.out.println("Последние 7 команд:");
         int index = 1;
         for (String command : commandHistory) {
@@ -256,7 +251,7 @@ public class Comands {
             return;
         }
         int totalEnginePower = vehicles.stream().mapToInt(Vehicle::getEnginePower).sum();
-        long count = vehicles.stream().count();
+        long count = vehicles.size();
         double averageEnginePower = (double) totalEnginePower / count;
         System.out.printf("Среднее значение enginePower для всех элементов коллекции: %.2f%n", averageEnginePower);
     }
@@ -307,10 +302,8 @@ public class Comands {
             System.out.println("Введите команду"); // Выводится, если строка пустая
             return false; // Возвращение для предотвращения дальнейших действий
         }
-
         String[] line = inputLine.trim().split(" ", 2); // Разделение строки на команду и аргумент
         String command = inputCommandToJavaStyle(line[0].toLowerCase()); // Преобразование к camelCase
-
         try {
             Method methodToInvoke = null;
             // Поиск метода, соответствующего названию команды
@@ -320,12 +313,10 @@ public class Comands {
                     break;
                 }
             }
-
             if (methodToInvoke == null) {
                 System.out.println("Такой команды не существует: " + command);
                 return false; // Завершить выполнение, если метод не найден
             }
-
             // Если метод без аргументов, вызываем его
             if (methodToInvoke.getParameterCount() == 0) {
                 methodToInvoke.invoke(this);

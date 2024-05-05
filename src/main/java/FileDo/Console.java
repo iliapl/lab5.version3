@@ -4,8 +4,8 @@ package FileDo;
 import java.util.Scanner;
 
 public class Console {
-    private Scanner scanner;
-    private Comands comands;
+    private final Scanner scanner;
+    private final Comands comands;
 
     public Console(Comands comands, Scanner scanner) {
         this.comands = comands;

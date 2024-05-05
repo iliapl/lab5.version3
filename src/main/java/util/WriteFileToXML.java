@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 public class WriteFileToXML {
     EnvDoing envDoing = new EnvDoing();
     VehiclesCollecton collecton;
-    private PrintWriter printWriter;
+    private final PrintWriter printWriter;
 
     public WriteFileToXML(PrintWriter printWriter, VehiclesCollecton collecton) {
         this.printWriter = printWriter;

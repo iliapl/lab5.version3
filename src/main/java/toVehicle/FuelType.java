@@ -5,5 +5,5 @@ public enum FuelType {
     ELECTRICITY,
     DIESEL,
     MANPOWER,
-    ANTIMATTER;
+    ANTIMATTER
 }

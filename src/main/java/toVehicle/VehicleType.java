@@ -5,5 +5,5 @@ public enum VehicleType {
     DRONE,
     BOAT,
     SHIP,
-    BICYCLE;
+    BICYCLE
 }

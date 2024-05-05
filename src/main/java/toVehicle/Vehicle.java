@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Vehicle implements Serializable {
-
     private String name;
     private int id;
     private Coordinates coordinates;
     private java.time.LocalDate creationDate;
-    private Integer enginePower;
+    private final Integer enginePower;
     private VehicleType type;
     private FuelType fuelType;
     private static int nextid = 0;
@@ -42,16 +41,13 @@ public class Vehicle implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
-
     @Override
     public int hashCode() {
-        return (int) id;
+        return id;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;

@@ -17,18 +17,16 @@ import java.util.*;
 
 public class FileRead {
     Document doc;
-    private Filewas filewas;
+    private final Filewas filewas;
     Scanner scanner;
     BufferedInputStream bufferedReaderin;
     public File file;
-
     public FileRead(BufferedInputStream bufferedReader, Scanner scanner, File file) {
         this.bufferedReaderin = bufferedReader;
         this.file = file;
         this.scanner = scanner;
         filewas = new Filewas();
     }
-
     public boolean canReadElements() {
         if (filewas.canReadFile(file)) {
             if (getFirstNode() != null) {
@@ -42,7 +40,6 @@ public class FileRead {
             return false;
         }
     }
-
     public HashSet<Vehicle> parserXML() {
         if (canReadElements()) {
             HashSet<Vehicle> vehicles = new HashSet<>(); //наш исходный хашс он здесь объявл впервые
@@ -65,77 +62,27 @@ public class FileRead {
                 for (int co = 0; co < elements.getLength(); co++) {
                     if (elements.item(co).getNodeType() == Node.ELEMENT_NODE) {
                         switch (elements.item(co).getNodeName()) {
-                            case "id": {
-                                id = Long.parseLong(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "name": {
-                                name = elements.item(co).getTextContent();
-                                break;
-                            }
-                            case "creationDate": {
-                                creationDate = LocalDate.parse(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "enginePower": {
-                                enginePower = Integer.parseInt(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "type": {
-                                type = VehicleType.valueOf(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "fuelType": {
-                                fuelType = FuelType.valueOf(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "coordinates": {
+                            case "id" -> id = Long.parseLong(elements.item(co).getTextContent());
+                            case "name" -> name = elements.item(co).getTextContent();
+                            case "creationDate" -> creationDate = LocalDate.parse(elements.item(co).getTextContent());
+                            case "enginePower" -> enginePower = Integer.parseInt(elements.item(co).getTextContent());
+                            case "type" -> type = VehicleType.valueOf(elements.item(co).getTextContent());
+                            case "fuelType" -> fuelType = FuelType.valueOf(elements.item(co).getTextContent());
+                            case "coordinates" -> {
                                 NodeList nodeCoordinates = elements.item(co).getChildNodes();
                                 long x = 0;
                                 float y = 0;
                                 for (int h = 0; h < nodeCoordinates.getLength(); h++) {
                                     if (nodeCoordinates.item(h).getNodeType() == Node.ELEMENT_NODE) {
                                         switch (nodeCoordinates.item(h).getNodeName()) {
-                                            case "x": {
-                                                x = Long.parseLong(nodeCoordinates.item(h).getTextContent());
-                                                break;
-                                            }
-                                            case "y": {
-                                                y = Float.parseFloat(nodeCoordinates.item(h).getTextContent());
-                                                break;
-                                            }
+                                            case "x" -> x = Long.parseLong(nodeCoordinates.item(h).getTextContent());
+                                            case "y" -> y = Float.parseFloat(nodeCoordinates.item(h).getTextContent());
                                         }
                                     }
                                 }
                                 coordinates = new Coordinates(x, y);
-                                break;
                             }
                         }
-                        /*
-                        if (elements.item(co).getNodeName().equals("coordinates")) {
-                            NodeList nodeCoordinates = elements.item(i).getChildNodes();
-                            System.out.println(elements.item(i).getChildNodes());
-                            long x = 0;
-                            Float y = null;
-                            for (int h = 0; h < nodeCoordinates.getLength(); h++) {
-                                if (nodeCoordinates.item(h).getNodeType() == Node.ELEMENT_NODE) {
-                                    switch (nodeCoordinates.item(h).getNodeName()) {
-                                        case "x": {
-                                            x = Long.parseLong(nodeCoordinates.item(h).getTextContent());
-                                            System.out.println(nodeCoordinates.item(h).getTextContent() + " " + "- name");
-                                            break;
-                                        }
-                                        case "y": {
-                                            y = Float.valueOf(nodeCoordinates.item(h).getTextContent());
-                                            System.out.println(nodeCoordinates.item(h).getTextContent() + " " + "- name");
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            coordinates = new Coordinates(x, y);
-                        }
-                        */
                     }
                 }
                 Vehicle vehicle = new Vehicle(name, coordinates, enginePower, type, fuelType);
@@ -169,16 +116,6 @@ public class FileRead {
 
     public NodeList getNodes() {
         return getFirstNode().getChildNodes();
-    }
-
-    public boolean canRead() throws IOException {
-        if (bufferedReaderin.available() != 0) {
-            System.out.println("Файл может быть прочитан");
-            return true;
-        } else {
-            System.out.println("Файл не может быть прочитан, количество байтов в файле" + bufferedReaderin.available());
-            return false;
-        }
     }
 
     public Vehicle readVehicleFromConsole() {
@@ -294,5 +231,4 @@ public class FileRead {
             }
         }
     }
-
 }
