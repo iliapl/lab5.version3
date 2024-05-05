@@ -95,10 +95,6 @@ public class Vehicle implements Serializable {
         return type;
     }
 
-    public static int getNextid() {
-        return nextid;
-    }
-
     public String vehicleToString() {
         return "Vehicle ID: " + id +
                 ", Name: " + name +

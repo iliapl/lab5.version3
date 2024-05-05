@@ -198,22 +198,41 @@ public class FileRead {
 
     public Coordinates readCordinatesFromConsole() {
         System.out.println("Введите координату х");
-        String string = scanner.nextLine();
-        long x = Long.parseLong(string);
-        System.out.println("Введите координату y (должна быть < 597)");
-        Float y = scanner.nextFloat();
-        while (y == 0 || y > 597) {
-            System.out.println("Вы не ввели координату, повторите попытку, y должна быть < 597");
-            y = scanner.nextFloat();
-        }
+        long x;
+        while (true)
+            try {
+                x = Long.parseLong(scanner.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Введите корректное x");
+            }
+        System.out.println("Введите координату y");
+        float y;
+        while (true)
+            try {
+                y = Float.parseFloat(scanner.nextLine());
+                if (y == 0 || y > 597) {
+                    System.out.println("Вы ввели неверное значение, повторите попытку, y должен быть < 597");
+                    y = scanner.nextFloat();
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Введите корректное y");
+            }
         return new Coordinates(x, y);
     }
 
     public int readEnginePowerFromConsole() {
-        int enginePower;
         System.out.println("Введите значение enginePower");
-        String string = scanner.nextLine();
-        enginePower = scanner.nextInt();
+        int enginePower;
+        while (true)
+            try {
+                enginePower = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (Exception e) {
+                System.out.println("Введите корректное enginePower");
+            }
         if (enginePower <= 0) {
             System.out.println("значение enginePower должно быть польше нуля, повторите попытку");
             return readEnginePowerFromConsole();

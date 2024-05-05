@@ -1,15 +1,1 @@
-<?xml version="1.0" ?>
-<Vehicles>
-    <Vehicle>
-        <id>12</id>
-        <name>paul</name>
-        <coordinates>
-            <x>0</x>
-            <y>1</y>
-        </coordinates>
-        <time>8</time>
-        <enginePower>1</enginePower>
-        <type>SHIP</type>
-        <fuelType>DIESEL</fuelType>
-    </Vehicle>
-</Vehicles>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Vehicles><vehicle><id>1</id><name>thyjtu</name><coordinates><x>234</x><y>435.0</y></coordinates><time>null</time><enginePower>546</enginePower><type>BOAT</type><fuelType>DIESEL</fuelType></vehicle><vehicle><id>2</id><name>ersgdfhj,</name><coordinates><x>23</x><y>456.0</y></coordinates><time>null</time><enginePower>54678</enginePower><type>BICYCLE</type><fuelType>ANTIMATTER</fuelType></vehicle></Vehicles>

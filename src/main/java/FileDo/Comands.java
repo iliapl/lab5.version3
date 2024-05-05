@@ -8,10 +8,7 @@ import util.WriteFileToXML;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -87,7 +84,7 @@ public class Comands {
         }
     }
 
-    public void add() { //дублирование
+    public void add() {
         try {
             Vehicle newVehicle = fileRead.readVehicleFromConsole();
             vehicles.add(newVehicle);
@@ -158,7 +155,7 @@ public class Comands {
                 System.out.println("Коллекция пуста, нечего сохранять.");
                 return;
             }
-            Files.newBufferedWriter(Path.of(path) , StandardOpenOption.TRUNCATE_EXISTING);
+            Files.newBufferedWriter(Path.of(path), StandardOpenOption.TRUNCATE_EXISTING);
             writeFileToXML.toSaveToXML();
             System.out.println("Коллекция успешно сохранена.");
         } catch (ParserConfigurationException e) {
@@ -169,10 +166,22 @@ public class Comands {
     }
 
 
-
-
-
-    public void executeScriptFileName() {
+    public void executeScriptFileName(String fileFullName) {
+        try {
+            File file = new File(fileFullName);
+            FileReader fileReader = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line = reader.readLine();
+            while (line != null) {
+                System.out.println("Выполняем команду " + line);
+                executeCommand(line);
+                line = reader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден");
+        } catch (IOException e) {
+            System.out.println("Ошибка при чтении из файла " + e.getMessage());
+        }
     }
 
     public void exit() {
