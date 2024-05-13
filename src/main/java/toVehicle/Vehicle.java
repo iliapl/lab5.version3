@@ -15,19 +15,19 @@ public class Vehicle implements Serializable,Comparable<Vehicle> {
 
     public Vehicle(String name, Coordinates coordinates, Integer enginePower, VehicleType type, FuelType fuelType) {
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty");
+            throw new IllegalArgumentException("Name не может быть нулевым или пустым");
         }
         if (coordinates == null) {
-            throw new IllegalArgumentException("Coordinates cannot be null");
+            throw new IllegalArgumentException("Coordinates не может быть нулевым или пустым");
         }
         if (enginePower == null || enginePower <= 0) {
-            throw new IllegalArgumentException("Engine power must be greater than 0 and not null");
+            throw new IllegalArgumentException("Engine power должно быть больше 0, но не может быть null");
         }
         if (type == null) {
-            throw new IllegalArgumentException("Vehicle type cannot be null");
+            throw new IllegalArgumentException("Vehicle не может быть null");
         }
         if (fuelType == null) {
-            throw new IllegalArgumentException("Fuel type cannot be null");
+            throw new IllegalArgumentException("Fuel type не может быть null");
         }
         id = nextid++;
         this.name = name;
