@@ -77,8 +77,11 @@ public class Comands {
             System.out.println("Коллекция пуста.");
             return;
         }
-        System.out.println("Элементы коллекции:");
-        for (Vehicle vehicle : vehicles) {
+        Comparator<Vehicle> comparator = Comparator.comparingInt(Vehicle::getEnginePower);
+        List<Vehicle> sortedList = new ArrayList<>(vehicles);
+        sortedList.sort(comparator);
+        System.out.println("Элементы коллекции (отсортированные по enginePower):");
+        for (Vehicle vehicle : sortedList) {
             System.out.println(vehicle.vehicleToString());
         }
     }
@@ -148,10 +151,6 @@ public class Comands {
 
     public void save() {
         try {
-            if (vehicles.isEmpty()) {
-                System.out.println("Коллекция пуста, нечего сохранять.");
-                return;
-            }
             Files.newBufferedWriter(Path.of(path), StandardOpenOption.TRUNCATE_EXISTING);
             writeFileToXML.toSaveToXML();
             System.out.println("Коллекция успешно сохранена.");
@@ -168,6 +167,10 @@ public class Comands {
             FileReader fileReader = new FileReader(file);
             BufferedReader reader = new BufferedReader(fileReader);
             String line = reader.readLine();
+            if (line == null) {
+                System.out.println("Файл пуст, считывать с файла нечего");
+                return;
+            }
             while (line != null) {
                 System.out.println("Выполняем команду " + line);
                 executeCommand(line);
