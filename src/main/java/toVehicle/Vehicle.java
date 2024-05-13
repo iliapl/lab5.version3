@@ -3,7 +3,7 @@ package toVehicle;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Vehicle implements Serializable {
+public class Vehicle implements Serializable,Comparable<Vehicle> {
     private String name;
     private int id;
     private Coordinates coordinates;
@@ -99,5 +99,10 @@ public class Vehicle implements Serializable {
                 ", Engine Power: " + enginePower +
                 ", Type: " + type +
                 ", Fuel Type: " + fuelType;
+    }
+
+    @Override
+    public int compareTo(Vehicle other) {
+        return Integer.compare(this.enginePower, other.enginePower);
     }
 }

@@ -77,8 +77,11 @@ public class Comands {
             System.out.println("Коллекция пуста.");
             return;
         }
-        System.out.println("Элементы коллекции:");
-        for (Vehicle vehicle : vehicles) {
+        Comparator<Vehicle> comparator = Comparator.comparingInt(Vehicle::getEnginePower);
+        List<Vehicle> sortedList = new ArrayList<>(vehicles);
+        sortedList.sort(comparator);
+        System.out.println("Элементы коллекции (отсортированные по enginePower):");
+        for (Vehicle vehicle : sortedList) {
             System.out.println(vehicle.vehicleToString());
         }
     }
