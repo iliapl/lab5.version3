@@ -14,8 +14,9 @@ public class Creatore {
     public void create() {
         scanner = new Scanner(System.in);
         EnvDoing envDoing = new EnvDoing();
+
         File file = new File(envDoing.getPATHcollection());
-        String string = envDoing.getPATHcollection();
+        String string = file.getAbsolutePath();
         FileInputStream fin;
         try {
             fin = new FileInputStream(file);
