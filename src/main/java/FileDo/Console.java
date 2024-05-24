@@ -1,6 +1,7 @@
 package FileDo;
 
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Console {
@@ -18,7 +19,12 @@ public class Console {
         boolean needExit = false;
         while (!needExit) {
             System.out.println("Введите комманду");
-            inputLine = scanner.nextLine();
+            try {
+                inputLine = scanner.nextLine();
+            }catch(NoSuchElementException e){
+                System.out.println("Произошла ошибка при чтении команды: " + e.getMessage());
+                return;
+            }
             needExit = comands.executeCommand(inputLine);
         }
     }

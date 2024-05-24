@@ -18,8 +18,8 @@ import java.util.*;
 public class FileRead {
     Document doc;
     private final Filewas filewas;
-    Scanner scanner;
-    BufferedInputStream bufferedReaderin;
+    public Scanner scanner;
+    public BufferedInputStream bufferedReaderin;
     public File file;
     public FileRead(BufferedInputStream bufferedReader, Scanner scanner, File file) {
         this.bufferedReaderin = bufferedReader;
@@ -62,25 +62,50 @@ public class FileRead {
                 for (int co = 0; co < elements.getLength(); co++) {
                     if (elements.item(co).getNodeType() == Node.ELEMENT_NODE) {
                         switch (elements.item(co).getNodeName()) {
-                            case "id" -> id = Long.parseLong(elements.item(co).getTextContent());
-                            case "name" -> name = elements.item(co).getTextContent();
-                            case "creationDate" -> creationDate = LocalDate.parse(elements.item(co).getTextContent());
-                            case "enginePower" -> enginePower = Integer.parseInt(elements.item(co).getTextContent());
-                            case "type" -> type = VehicleType.valueOf(elements.item(co).getTextContent());
-                            case "fuelType" -> fuelType = FuelType.valueOf(elements.item(co).getTextContent());
-                            case "coordinates" -> {
+                            case "id": {
+                                id = Long.parseLong(elements.item(co).getTextContent());
+                                break;
+                            }
+                            case "name": {
+                                name = elements.item(co).getTextContent();
+                                break;
+                            }
+                            case "creationDate": {
+                                creationDate = LocalDate.parse(elements.item(co).getTextContent());
+                                break;
+                            }
+                            case "enginePower": {
+                                enginePower = Integer.parseInt(elements.item(co).getTextContent());
+                                break;
+                            }
+                            case "type": {
+                                type = VehicleType.valueOf(elements.item(co).getTextContent());
+                                break;
+                            }
+                            case "fuelType": {
+                                fuelType = FuelType.valueOf(elements.item(co).getTextContent());
+                                break;
+                            }
+                            case "coordinates":{
                                 NodeList nodeCoordinates = elements.item(co).getChildNodes();
                                 long x = 0;
                                 float y = 0;
                                 for (int h = 0; h < nodeCoordinates.getLength(); h++) {
                                     if (nodeCoordinates.item(h).getNodeType() == Node.ELEMENT_NODE) {
                                         switch (nodeCoordinates.item(h).getNodeName()) {
-                                            case "x" -> x = Long.parseLong(nodeCoordinates.item(h).getTextContent());
-                                            case "y" -> y = Float.parseFloat(nodeCoordinates.item(h).getTextContent());
+                                            case "x": {
+                                                x = Long.parseLong(nodeCoordinates.item(h).getTextContent());
+                                                break;
+                                            }
+                                            case "y": {
+                                                y = Float.parseFloat(nodeCoordinates.item(h).getTextContent());
+                                                break;
+                                            }
                                         }
                                     }
                                 }
-                                coordinates = new Coordinates(x, y);
+                                coordinates = new Coordinates(x,y);
+                                break;
                             }
                         }
                     }
@@ -92,9 +117,7 @@ public class FileRead {
             }
             return vehicles;
         } else {
-            System.out.println("Пожалуйста создадите новый объект");
-            HashSet<Vehicle> vehicles = new HashSet<>(); //наш исходный хашс он здесь объявл впервые
-            vehicles.add(readVehicleFromConsole());
+            HashSet<Vehicle> vehicles = new HashSet<>();
             return vehicles;
         }
     }
