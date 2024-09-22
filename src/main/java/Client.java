@@ -8,5 +8,6 @@ public class Client {
         creatore.create();
         Console console = new Console(creatore.comands, creatore.scanner);
         console.start();
+        System.out.println("ГИТХАБ ДОСТАЛ");
     }
 }
