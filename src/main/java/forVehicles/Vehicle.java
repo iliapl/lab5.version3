@@ -1,15 +1,23 @@
-package toVehicle;
+package forVehicles;
+
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Vehicle implements Serializable,Comparable<Vehicle> {
+    @Getter
     private String name;
     private int id;
+    @Getter
     private Coordinates coordinates;
+    @Getter
     private java.time.LocalDate creationDate;
+    @Getter
     private final Integer enginePower;
+    @Getter
     private VehicleType type;
+    @Getter
     private FuelType fuelType;
     private static int nextid = 0;
 
@@ -56,16 +64,8 @@ public class Vehicle implements Serializable,Comparable<Vehicle> {
         return (vehicle.id == this.id);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public long getId() {
         return id;
-    }
-
-    public Integer getEnginePower() {
-        return enginePower;
     }
 
     public void update(Vehicle vehicle) {
@@ -73,22 +73,6 @@ public class Vehicle implements Serializable,Comparable<Vehicle> {
         coordinates = vehicle.coordinates;
         type = vehicle.type;
         fuelType = vehicle.fuelType;
-    }
-
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public VehicleType getType() {
-        return type;
     }
 
     public String vehicleToString() {

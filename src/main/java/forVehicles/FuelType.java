@@ -1,4 +1,4 @@
-package toVehicle;
+package forVehicles;
 
 public enum FuelType {
     KEROSENE,

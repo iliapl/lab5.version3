@@ -1,4 +1,4 @@
-import FileDo.Console;
+import forCOmmands.Console;
 import util.Creatore;
 
 public class Client {
@@ -6,7 +6,7 @@ public class Client {
         System.out.println("гоу-гоу");
         Creatore creatore = new Creatore();
         creatore.create();
-        Console console = new Console(creatore.comands, creatore.scanner);
+        Console console = new Console(creatore.commands, creatore.scanner);
         console.start();
         System.out.println("ГИТХАБ ДОСТАЛ");
     }

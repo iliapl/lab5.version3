@@ -2,8 +2,8 @@ package util;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import toVehicle.Vehicle;
-import toVehicle.VehiclesCollecton;
+import forVehicles.Vehicle;
+import forVehicles.VehiclesCollecton;
 import javax.xml.parsers.*;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;

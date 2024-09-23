@@ -1,5 +1,8 @@
-package toVehicle;
+package forVehicles;
 
+import lombok.Getter;
+
+@Getter
 public class Coordinates {
     private final long x;
     private final float y;
@@ -11,14 +14,6 @@ public class Coordinates {
         } else {
             throw new IllegalArgumentException("Недопустимое значение y");
         }
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public long getX() {
-        return x;
     }
 
     @Override

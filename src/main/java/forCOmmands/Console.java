@@ -1,15 +1,14 @@
-package FileDo;
-
+package forCOmmands;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Console {
     private final Scanner scanner;
-    private final Comands comands;
+    private final CommandManager commands;
 
-    public Console(Comands comands, Scanner scanner) {
-        this.comands = comands;
+    public Console(CommandManager commands, Scanner scanner) {
+        this.commands = commands;
         this.scanner = scanner;
     }
 
@@ -25,7 +24,7 @@ public class Console {
                 System.out.println("Произошла ошибка при чтении команды: " + e.getMessage());
                 return;
             }
-            needExit = comands.executeCommand(inputLine);
+            needExit = commands.executeCommand(inputLine);
         }
     }
 }

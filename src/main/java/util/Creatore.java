@@ -1,14 +1,16 @@
 package util;
 
-import FileDo.Comands;
-import toVehicle.VehiclesCollecton;
+import forCOmmands.CommandManager;
+import forVehicles.VehicleReader;
+import forVehicles.VehiclesCollecton;
 
 import java.io.*;
 import java.util.Scanner;
 
 public class Creatore {
     public Scanner scanner;
-    public Comands comands;
+    public CommandManager commands;
+    public VehicleReader vehicleReader;
     public VehiclesCollecton vehiclesCollecton;
 
     public void create() {
@@ -34,6 +36,6 @@ public class Creatore {
         FileRead fileRead = new FileRead(bufferedReader, scanner, file);
         vehiclesCollecton = new VehiclesCollecton(fileRead.parserXML());
         WriteFileToXML writeFileToXML = new WriteFileToXML(printWriter, vehiclesCollecton);
-        comands = new Comands(vehiclesCollecton, fileRead, writeFileToXML, file);
+        commands = new CommandManager(vehiclesCollecton, vehicleReader, writeFileToXML, file);
     }
 }
