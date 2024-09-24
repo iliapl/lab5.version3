@@ -2,25 +2,23 @@ package forCOmmands.Commands;
 
 import forCOmmands.Command;
 import forVehicles.Vehicle;
-import forVehicles.VehicleReader;
-import util.FileRead;
+import forVehicles.ConsoleReader;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Add implements Command {
     private final Set<Vehicle> vehicles;
-    private VehicleReader vehicleReader;
+    private final ConsoleReader consoleReader;
 
-    public Add(Set<Vehicle> vehicles, VehicleReader vehicleReader) {
+    public Add(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         this.vehicles = vehicles;
-        this.vehicleReader = vehicleReader;
+        this.consoleReader = consoleReader;
     }
 
     @Override
     public void execute(String argument) {
         try {
-            Vehicle newVehicle = vehicleReader.readVehicleFromConsole();
+            Vehicle newVehicle = consoleReader.readVehicleFromConsole();
             vehicles.add(newVehicle);
             System.out.println("Добавлен новый транспорт: " + newVehicle.vehicleToString());
         } catch (IllegalArgumentException e) {

@@ -1,14 +1,11 @@
 package forCOmmands.Commands;
 
 import forCOmmands.Command;
-import forCOmmands.CommandManager;
 
 import java.util.Deque;
 
 public class History implements Command {
     private final Deque<String> commandHistory;
-    private CommandManager commandManager;
-    private final int maxHistorySize = 7;
 
     public History(Deque<String> commandHistory) {
         this.commandHistory = commandHistory;

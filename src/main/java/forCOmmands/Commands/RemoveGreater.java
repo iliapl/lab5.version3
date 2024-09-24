@@ -2,23 +2,22 @@ package forCOmmands.Commands;
 
 import forCOmmands.Command;
 import forVehicles.Vehicle;
-import forVehicles.VehicleReader;
+import forVehicles.ConsoleReader;
 
 import java.util.Set;
 
 public class RemoveGreater implements Command {
     private final Set<Vehicle> vehicles;
-    private final VehicleReader vehicleReader;
+    private final ConsoleReader consoleReader;
 
-    public RemoveGreater(Set<Vehicle> vehicles, VehicleReader vehicleReader) {
+    public RemoveGreater(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         this.vehicles = vehicles;
-        this.vehicleReader = vehicleReader;
+        this.consoleReader = consoleReader;
     }
-
     @Override
     public void execute(String argument){
         try {
-            Vehicle referenceVehicle = vehicleReader.readVehicleFromConsole();
+            Vehicle referenceVehicle = consoleReader.readVehicleFromConsole();
             int referenceEnginePower = referenceVehicle.getEnginePower();
             int initialSize = vehicles.size();
             vehicles.removeIf(vehicle -> vehicle.getEnginePower() > referenceEnginePower);

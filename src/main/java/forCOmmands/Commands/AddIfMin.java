@@ -2,8 +2,7 @@ package forCOmmands.Commands;
 
 import forCOmmands.Command;
 import forVehicles.Vehicle;
-import forVehicles.VehicleReader;
-import util.FileRead;
+import forVehicles.ConsoleReader;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -11,17 +10,17 @@ import java.util.Set;
 
 public class AddIfMin implements Command {
     private final Set<Vehicle> vehicles;
-    private final VehicleReader vehicleReader;
+    private final ConsoleReader consoleReader;
 
-    public AddIfMin(Set<Vehicle> vehicles, VehicleReader vehicleReader) {
+    public AddIfMin(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         this.vehicles = vehicles;
-        this.vehicleReader = vehicleReader;
+        this.consoleReader = consoleReader;
     }
 
     @Override
     public void execute(String argument) {
         try {
-            Vehicle newVehicle = vehicleReader.readVehicleFromConsole();
+            Vehicle newVehicle = consoleReader.readVehicleFromConsole();
             Optional<Vehicle> minVehicle = vehicles.stream().min(Comparator.comparingInt(Vehicle::getEnginePower));
             if (minVehicle.isPresent()) {
                 int minEnginePower = minVehicle.get().getEnginePower();

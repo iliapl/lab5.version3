@@ -7,8 +7,7 @@ import java.io.*;
 import java.util.Map;
 
 public class ExecuteScript implements Command {
-    private final Map<String, Command> commands; // Словарь всех команд
-    CommandManager commandManager;
+    private final Map<String, Command> commands;
 
     public ExecuteScript(Map<String, Command> commands) {
         this.commands = commands;
@@ -26,7 +25,7 @@ public class ExecuteScript implements Command {
 
             while (line != null) {
                 System.out.println("Выполняем команду: " + line);
-                commandManager.executeCommand(line);// ???
+       //         commandManager.executeCommand(line);// ???
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {

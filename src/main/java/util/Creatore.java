@@ -1,7 +1,7 @@
 package util;
 
 import forCOmmands.CommandManager;
-import forVehicles.VehicleReader;
+import forVehicles.ConsoleReader;
 import forVehicles.VehiclesCollecton;
 
 import java.io.*;
@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 public class Creatore {
     public Scanner scanner;
+
     public CommandManager commands;
-    public VehicleReader vehicleReader;
+    public ConsoleReader consoleReader;
     public VehiclesCollecton vehiclesCollecton;
 
     public void create() {
@@ -33,9 +34,10 @@ public class Creatore {
             throw new RuntimeException(e);
         }
         PrintWriter printWriter = new PrintWriter(fileOutputStream);
+        ConsoleReader consoleReader = new ConsoleReader(scanner);
         FileRead fileRead = new FileRead(bufferedReader, scanner, file);
         vehiclesCollecton = new VehiclesCollecton(fileRead.parserXML());
         WriteFileToXML writeFileToXML = new WriteFileToXML(printWriter, vehiclesCollecton);
-        commands = new CommandManager(vehiclesCollecton, vehicleReader, writeFileToXML, file);
+        commands = new CommandManager(vehiclesCollecton, consoleReader, writeFileToXML, file);
     }
 }

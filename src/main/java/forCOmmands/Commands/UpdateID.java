@@ -2,16 +2,16 @@ package forCOmmands.Commands;
 
 import forCOmmands.Command;
 import forVehicles.Vehicle;
-import forVehicles.VehicleReader;
+import forVehicles.ConsoleReader;
 
 import java.util.Set;
 
 public class UpdateID implements Command {
     private final Set<Vehicle> vehicles;
-    private final VehicleReader vehicleReader;
-    public UpdateID (Set<Vehicle> vehicles, VehicleReader vehicleReader){
+    private final ConsoleReader consoleReader;
+    public UpdateID (Set<Vehicle> vehicles, ConsoleReader consoleReader){
         this.vehicles = vehicles;
-        this.vehicleReader = vehicleReader;
+        this.consoleReader = consoleReader;
     }
     @Override
     public void execute(String argument) {
@@ -28,7 +28,7 @@ public class UpdateID implements Command {
                 System.out.println("Элемент с ID " + id + " не найден.");
                 return;
             }
-            Vehicle newVehicleData = vehicleReader.readVehicleFromConsole();
+            Vehicle newVehicleData = consoleReader.readVehicleFromConsole();
             vehicleToUpdate.update(newVehicleData);
             System.out.println("Элемент с ID " + id + " обновлен.");
 

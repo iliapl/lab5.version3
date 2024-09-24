@@ -1,16 +1,11 @@
 package forVehicles;
 
-import forVehicles.Coordinates;
-import forVehicles.FuelType;
-import forVehicles.Vehicle;
-import forVehicles.VehicleType;
-
 import java.util.Scanner;
 
-public class VehicleReader {
+public class ConsoleReader {
     private final Scanner scanner;
 
-    public VehicleReader(Scanner scanner) {
+    public ConsoleReader(Scanner scanner) {
         this.scanner = scanner;
     }
 
