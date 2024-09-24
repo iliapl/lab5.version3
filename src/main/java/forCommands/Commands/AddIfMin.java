@@ -1,8 +1,8 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
-import forVehicles.ConsoleReader;
+import ReadFromConsole.ConsoleReader;
 
 import java.util.Comparator;
 import java.util.Optional;
@@ -11,12 +11,10 @@ import java.util.Set;
 public class AddIfMin implements Command {
     private final Set<Vehicle> vehicles;
     private final ConsoleReader consoleReader;
-
     public AddIfMin(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         this.vehicles = vehicles;
         this.consoleReader = consoleReader;
     }
-
     @Override
     public void execute(String argument) {
         try {

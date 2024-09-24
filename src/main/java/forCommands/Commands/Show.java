@@ -1,6 +1,6 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.ArrayList;

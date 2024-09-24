@@ -1,8 +1,7 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
-import util.FileRead;
 
 import java.util.Set;
 

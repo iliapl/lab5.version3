@@ -1,17 +1,15 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.Set;
 
 public class SumOfEnginePower implements Command {
     private final Set<Vehicle> vehicles;
-
     public SumOfEnginePower(Set<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
-
     @Override
     public void execute(String argument){
         if (vehicles.isEmpty()) {

@@ -1,8 +1,8 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
-import forVehicles.ConsoleReader;
+import ReadFromConsole.ConsoleReader;
 
 import java.util.Set;
 
@@ -31,7 +31,6 @@ public class UpdateID implements Command {
             Vehicle newVehicleData = consoleReader.readVehicleFromConsole();
             vehicleToUpdate.update(newVehicleData);
             System.out.println("Элемент с ID " + id + " обновлен.");
-
         } catch (NumberFormatException e) {
             System.out.println("Некорректный формат ID. Введите целое число.");
         } catch (Exception e) {

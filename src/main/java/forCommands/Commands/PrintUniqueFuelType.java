@@ -1,6 +1,6 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.FuelType;
 import forVehicles.Vehicle;
 
@@ -9,11 +9,9 @@ import java.util.stream.Collectors;
 
 public class PrintUniqueFuelType implements Command {
     private final Set<Vehicle> vehicles;
-
     public PrintUniqueFuelType(Set<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
-
     @Override
     public void execute(String argument){
         if (vehicles.isEmpty()) {

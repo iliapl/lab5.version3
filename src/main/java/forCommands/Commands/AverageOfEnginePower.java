@@ -1,17 +1,15 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.Set;
 
 public class AverageOfEnginePower implements Command {
     private final Set<Vehicle> vehicles;
-
     public AverageOfEnginePower(Set<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
-
     @Override
     public void execute(String argument) {
         try {

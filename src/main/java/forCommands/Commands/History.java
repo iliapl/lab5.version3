@@ -1,16 +1,14 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 
 import java.util.Deque;
 
 public class History implements Command {
     private final Deque<String> commandHistory;
-
     public History(Deque<String> commandHistory) {
         this.commandHistory = commandHistory;
     }
-
     @Override
     public void execute(String argument){
         if (commandHistory.isEmpty()) {

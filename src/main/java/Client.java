@@ -1,4 +1,4 @@
-import forCOmmands.Console;
+import ReadFromConsole.Console;
 import util.Creatore;
 
 public class Client {

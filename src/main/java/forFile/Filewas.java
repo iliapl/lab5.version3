@@ -1,11 +1,10 @@
-package util;
+package forFile;
 
 
 import java.io.File;
 import java.nio.file.Files;
 
 public class Filewas {
-
     public boolean canReadFile(File file)  {
         if (file.exists()) {
             if (file.isDirectory() ) {

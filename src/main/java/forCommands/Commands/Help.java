@@ -1,6 +1,6 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 
 public class Help implements Command {
     @Override

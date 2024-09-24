@@ -1,4 +1,4 @@
-package util;
+package forFile;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -16,7 +16,6 @@ import java.util.*;
 
 public class FileRead {
     Document doc;
-    private final Filewas filewas;
     public Scanner scanner;
     public BufferedInputStream bufferedReaderin;
     public File file;
@@ -24,10 +23,9 @@ public class FileRead {
         this.bufferedReaderin = bufferedReader;
         this.file = file;
         this.scanner = scanner;
-        filewas = new Filewas();
     }
     public boolean canReadElements() {
-        if (filewas.canReadFile(file)) {
+        if (new Filewas().canReadFile(file)) {
             if (getFirstNode() != null) {
                 return true;
             } else {

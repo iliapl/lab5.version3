@@ -1,4 +1,6 @@
-package forCOmmands;
+package ReadFromConsole;
+
+import forCommands.CommandManager;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

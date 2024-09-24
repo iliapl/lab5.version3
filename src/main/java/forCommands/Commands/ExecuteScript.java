@@ -1,18 +1,14 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
-import forCOmmands.CommandManager;
-
+import forCommands.Command;
+import forCommands.CommandManager;
 import java.io.*;
-import java.util.Map;
 
 public class ExecuteScript implements Command {
-    private final Map<String, Command> commands;
-
-    public ExecuteScript(Map<String, Command> commands) {
-        this.commands = commands;
+    private final CommandManager commandManager;
+    public ExecuteScript(CommandManager commandManager) {
+        this.commandManager = commandManager;
     }
-
     @Override
     public void execute(String argument) {
         File file = new File(argument);
@@ -22,10 +18,9 @@ public class ExecuteScript implements Command {
                 System.out.println("Файл пуст, считывать с файла нечего.");
                 return;
             }
-
             while (line != null) {
                 System.out.println("Выполняем команду: " + line);
-       //         commandManager.executeCommand(line);// ???
+                commandManager.executeCommand(line);
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {
@@ -34,9 +29,6 @@ public class ExecuteScript implements Command {
             System.out.println("Ошибка при чтении из файла: " + e.getMessage());
         }
     }
-
-    // Метод для выполнения команды, включая её аргументы
-
 }
     /*
     private final Method methods;

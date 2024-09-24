@@ -1,10 +1,14 @@
-package forVehicles;
+package ReadFromConsole;
+
+import forVehicles.Coordinates;
+import forVehicles.FuelType;
+import forVehicles.Vehicle;
+import forVehicles.VehicleType;
 
 import java.util.Scanner;
 
 public class ConsoleReader {
     private final Scanner scanner;
-
     public ConsoleReader(Scanner scanner) {
         this.scanner = scanner;
     }
@@ -72,11 +76,9 @@ public class ConsoleReader {
     private VehicleType readVehicleTypeFromConsole() {
         VehicleType[] types = VehicleType.values();
         System.out.println("Выберите тип транспорта:");
-
         for (int i = 0; i < types.length; i++) {
             System.out.println(i + " - " + types[i]);
         }
-
         while (true) {
             System.out.print("Введите номер варианта: ");
             String input = scanner.nextLine().trim();

@@ -1,9 +1,9 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.VehiclesCollecton;
 import util.EnvDoing;
-import util.WriteFileToXML;
+import forFile.WriteFileToXML;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -11,27 +11,20 @@ import java.io.PrintWriter;
 
 public class Save implements Command {
     private final VehiclesCollecton collection;
-    private final WriteFileToXML writeFileToXML;
-    private final EnvDoing envDoing;
-
-    public Save (VehiclesCollecton collection, WriteFileToXML writeFileToXML, EnvDoing envDoing) {
+    public Save (VehiclesCollecton collection) {
         this.collection = collection;
-        this.writeFileToXML = writeFileToXML;
-        this.envDoing = new EnvDoing();
     }
 
     @Override
     public void execute(String argument) {
-        String filePath = envDoing.getPATHcollection();
+        String filePath = new EnvDoing().getPATHcollection();
         if (filePath == null) {
-            System.out.println("Переменная окружения LOL не найдена!");
+            System.out.println("Неверно указан путь к файлу");
             return;
         }
-
         try (PrintWriter printWriter = new PrintWriter(filePath)) {
-            // Создаем объект WriteFileToXML, передавая PrintWriter и коллекцию
             WriteFileToXML writeFileToXML = new WriteFileToXML(printWriter, collection);
-            writeFileToXML.toSaveToXML();  // Сохраняем коллекцию в XML
+            writeFileToXML.toSaveToXML();
             System.out.println("Коллекция успешно сохранена в файл.");
         } catch (ParserConfigurationException e) {
             System.out.println("Ошибка при сохранении коллекции: " + e.getMessage());

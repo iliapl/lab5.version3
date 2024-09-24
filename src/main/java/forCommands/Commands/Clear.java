@@ -1,17 +1,15 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.Set;
 
 public class Clear implements Command {
     private final Set<Vehicle> vehicles;
-
     public Clear(Set<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
-
     @Override
     public void execute(String argument){
         if (vehicles.isEmpty()) {

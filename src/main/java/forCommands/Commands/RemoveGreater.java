@@ -1,15 +1,14 @@
-package forCOmmands.Commands;
+package forCommands.Commands;
 
-import forCOmmands.Command;
+import forCommands.Command;
 import forVehicles.Vehicle;
-import forVehicles.ConsoleReader;
+import ReadFromConsole.ConsoleReader;
 
 import java.util.Set;
 
 public class RemoveGreater implements Command {
     private final Set<Vehicle> vehicles;
     private final ConsoleReader consoleReader;
-
     public RemoveGreater(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         this.vehicles = vehicles;
         this.consoleReader = consoleReader;
