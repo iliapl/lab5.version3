@@ -1,0 +1,16 @@
+help
+info
+show
+add
+updateid
+removebyid
+clear
+save
+executescript
+exit
+addifmin
+removegreater
+history
+sumofenginepower
+averageofenginepower
+printuniquefueltype
