@@ -66,16 +66,37 @@ public class CommandManager {
          чтобы не было NullPointerException
          */
 
+        //проверка на существование команды
         Command command = commands.get(commandName);
         if (command == null) {
-            System.out.println("Команда не найдена: " + commandName);
+            System.out.println("Команда не найдена " + commandName);
             return false;
+        }
+
+        //проверка на наличие аргумента
+        if (commandRequiresArgument(commandName)) {
+            // Если команда требует аргумент, но он не передан
+            if (argument.isEmpty()) {
+                System.out.println("Команда " + commandName + " требует аргумент");
+                return false;
+            }
+        } else {
+            // Если команда не требует аргумент, но он передан
+            if (!argument.isEmpty()) {
+                System.out.println("Команда " + commandName + " не принимает аргументов");
+                return false;
+            }
         }
         recordCommand(commandName); //запись существующей команды в историю
         command.execute(argument);  // Выполняем команду
         return false;
     }
 
+    //метод для проверки наличия аргументов у команд
+    private boolean commandRequiresArgument(String commandName) {
+        Set<String> commandsWithArgs = Set.of("updateid", "removebyid", "executescript");
+        return commandsWithArgs.contains(commandName);  // Если команда есть в этом списке, она требует аргумент
+    }
     //метод для записи команд в историю
     private void recordCommand(String command) {
         int maxHistorySize = 7;
