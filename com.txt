@@ -1,4 +1,10 @@
 show
-help
 info
 add
+Matt
+1
+1
+1
+1
+1
+exit
