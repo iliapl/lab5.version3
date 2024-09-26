@@ -1,10 +1,4 @@
 show
 info
-add
-Matt
-1
-1
-1
-1
-1
+add Matt 1 1 1 1 1
 exit

@@ -9,7 +9,7 @@ public class Console {
     private final Scanner scanner;
     private final ExecuteCommands commands;
     public Console(ExecuteCommands commands, Scanner scanner) {
-        this.commands = commands;  // Инициализируем поле
+        this.commands = commands;
         this.scanner = scanner;
     }
     public void start() {
