@@ -1,13 +1,14 @@
 package forCommands.Commands;
 
 import forCommands.Command;
-import forCommands.CommandManager;
+import forCommands.ExecuteCommands;
+
 import java.io.*;
 
 public class ExecuteScript implements Command {
-    private final CommandManager commandManager;
-    public ExecuteScript(CommandManager commandManager) {
-        this.commandManager = commandManager;
+    private final ExecuteCommands commands;
+    public ExecuteScript(ExecuteCommands commands) {
+        this.commands = commands;
     }
     @Override
     public void execute(String argument) {
@@ -20,7 +21,7 @@ public class ExecuteScript implements Command {
             }
             while (line != null) {
                 System.out.println("Выполняем команду: " + line);
-                commandManager.executeCommand(line);
+                commands.executeCommand(line);
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {

@@ -1,26 +1,26 @@
 package forCommands.Commands;
 
-import forCommands.Command;
-import forVehicles.Vehicle;
 import ReadFromConsole.ConsoleReader;
+import forCommands.CommandsWithElements;
+import forVehicles.Vehicle;
 
 import java.util.Set;
+import java.util.Scanner;
 
-public class Add implements Command {
-    private final Set<Vehicle> vehicles;
-    private final ConsoleReader consoleReader;
-    public Add(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
-        this.vehicles = vehicles;
-        this.consoleReader = consoleReader;
+public class Add extends CommandsWithElements {
+
+    public Add(Set<Vehicle> vehicles, Scanner scanner, ConsoleReader consoleReader) {
+        super(vehicles, scanner, consoleReader);
     }
+
     @Override
     public void execute(String argument) {
-        try {
-            Vehicle newVehicle = consoleReader.readVehicleFromConsole();
+        Vehicle newVehicle = getVehicle(argument);
+        if (newVehicle != null) {
             vehicles.add(newVehicle);
             System.out.println("Добавлен новый транспорт: " + newVehicle.vehicleToString());
-        } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка при добавлении нового транспорта: " + e.getMessage());
+        } else {
+            System.out.println("Ошибка при добавлении транспорта.");
         }
     }
 }

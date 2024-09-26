@@ -6,7 +6,7 @@ public class Client {
         System.out.println("гоу-гоу");
         Creatore creatore = new Creatore();
         creatore.create();
-        Console console = new Console(creatore.commands, creatore.scanner);
+        Console console = new Console(creatore.executeCommands, creatore.scanner);
         console.start();
     }
 }

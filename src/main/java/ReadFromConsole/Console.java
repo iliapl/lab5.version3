@@ -1,19 +1,17 @@
 package ReadFromConsole;
 
-import forCommands.CommandManager;
+import forCommands.ExecuteCommands;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Console {
     private final Scanner scanner;
-    private final CommandManager commands;
-
-    public Console(CommandManager commands, Scanner scanner) {
-        this.commands = commands;
+    private final ExecuteCommands commands;
+    public Console(ExecuteCommands commands, Scanner scanner) {
+        this.commands = commands;  // Инициализируем поле
         this.scanner = scanner;
     }
-
     public void start() {
         System.out.println("Здраствуйте. Программа готова к работе");
         String inputLine;

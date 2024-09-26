@@ -9,118 +9,112 @@ import java.util.Scanner;
 
 public class ConsoleReader {
     private final Scanner scanner;
+
     public ConsoleReader(Scanner scanner) {
         this.scanner = scanner;
     }
 
     public Vehicle readVehicleFromConsole() {
-        return new Vehicle(readNamefromConsole(), readCordinatesFromConsole(), readEnginePowerFromConsole(), readVehicleTypeFromConsole(), readFuelTypeFromConsole());
+        String name = readNameFromConsole();
+        Coordinates coordinates = readCoordinatesFromConsole();
+        int enginePower = readEnginePowerFromConsole();
+        VehicleType vehicleType = readVehicleTypeFromConsole();
+        FuelType fuelType = readFuelTypeFromConsole();
+        return new Vehicle(name, coordinates, enginePower, vehicleType, fuelType);
     }
-
-    private String readNamefromConsole() {
-        System.out.println("Введите имя");
-        String name = scanner.nextLine();
-        if (name == null || name.isEmpty()) {
-            System.out.println("Вы не ввели имя");
-            return readNamefromConsole();
-        } else {
-            return name;
+    private String readNameFromConsole() {
+        System.out.println("Введите имя:");
+        String name = scanner.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("Имя не должно быть пустым.");
+            return readNameFromConsole();
         }
+        return name;
     }
-
-    private Coordinates readCordinatesFromConsole() {
-        System.out.println("Введите координату х");
-        long x;
-        while (true)
-            try {
-                x = Long.parseLong(scanner.nextLine());
-                break;
-            } catch (Exception e) {
-                System.out.println("Введите корректное x");
-            }
-        System.out.println("Введите координату y");
+    private Coordinates readCoordinatesFromConsole() {
+        System.out.println("Введите координату х:");
+        long x = readLongInput();
+        System.out.println("Введите координату y (0 < y <= 597):");
         float y;
-        while (true)
-            try {
-                y = Float.parseFloat(scanner.nextLine());
-                if (y == 0 || y > 597) {
-                    System.out.println("Вы ввели неверное значение, повторите попытку, y должен быть < 597");
-                    y = scanner.nextFloat();
-                } else {
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println("Введите корректное y");
+        while (true) {
+            y = readFloatInput();
+            if (y > 0 && y <= 597) {
+                break;
+            } else {
+                System.out.println("Введите корректное значение для y (0 < y <= 597).");
             }
+        }
         return new Coordinates(x, y);
     }
-
     private int readEnginePowerFromConsole() {
-        System.out.println("Введите значение enginePower");
+        System.out.println("Введите значение enginePower (должно быть больше 0):");
         int enginePower;
-        while (true)
-            try {
-                enginePower = Integer.parseInt(scanner.nextLine());
+        while (true) {
+            enginePower = readIntInput();
+            if (enginePower > 0) {
                 break;
-            } catch (Exception e) {
-                System.out.println("Введите корректное enginePower");
+            } else {
+                System.out.println("EnginePower должно быть больше нуля.");
             }
-        if (enginePower <= 0) {
-            System.out.println("значение enginePower должно быть польше нуля, повторите попытку");
-            return readEnginePowerFromConsole();
-        } else {
-            return enginePower;
         }
+        return enginePower;
     }
-
     private VehicleType readVehicleTypeFromConsole() {
         VehicleType[] types = VehicleType.values();
         System.out.println("Выберите тип транспорта:");
         for (int i = 0; i < types.length; i++) {
             System.out.println(i + " - " + types[i]);
         }
+        return readEnumChoice(types);
+    }
+    private FuelType readFuelTypeFromConsole() {
+        FuelType[] fuelTypes = FuelType.values();
+        System.out.println("Выберите тип топлива:");
+        for (int i = 0; i < fuelTypes.length; i++) {
+            System.out.println(i + " - " + fuelTypes[i]);
+        }
+        return readEnumChoice(fuelTypes);
+    }
+
+    // Универсальный метод для чтения enum (VehicleType и FuelType)
+    private <T extends Enum<T>> T readEnumChoice(T[] enumValues) {
         while (true) {
-            System.out.print("Введите номер варианта: ");
-            String input = scanner.nextLine().trim();
-
-            if (input.isEmpty()) {
-                System.out.println("Ввод не должен быть пустым. Попробуйте снова.");
-                continue;
-            }
-
-            try {
-                int choice = Integer.parseInt(input);
-                if (choice >= 0 && choice < types.length) {
-                    return types[choice];
-                } else {
-                    System.out.println("Неверный выбор. Попробуйте снова.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Некорректный формат. Введите число, соответствующее типу транспорта.");
+            int choice = readIntInput();
+            if (choice >= 0 && choice < enumValues.length) {
+                return enumValues[choice];
+            } else {
+                System.out.println("Неверный выбор. Попробуйте снова.");
             }
         }
     }
 
-    private FuelType readFuelTypeFromConsole() {
-        FuelType[] fuelTypes = FuelType.values();
-        System.out.println("Выберите тип топлива:");
-
-        for (int i = 0; i < fuelTypes.length; i++) {
-            System.out.println(i + " - " + fuelTypes[i]);
-        }
-
+    // Вспомогательные методы для ввода данных
+    private long readLongInput() {
         while (true) {
-            System.out.print("Введите номер варианта: ");
-            String input = scanner.nextLine().trim();
             try {
-                int choice = Integer.parseInt(input);
-                if (choice >= 0 && choice < fuelTypes.length) {
-                    return fuelTypes[choice];
-                } else {
-                    System.out.println("Неверный выбор. Попробуйте снова.");
-                }
+                return Long.parseLong(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("Некорректный формат ввода. Введите число, соответствующее типу топлива.");
+                System.out.println("Ошибка: введите корректное число.");
+            }
+        }
+    }
+
+    private float readFloatInput() {
+        while (true) {
+            try {
+                return Float.parseFloat(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите корректное число.");
+            }
+        }
+    }
+
+    private int readIntInput() {
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите корректное число.");
             }
         }
     }
