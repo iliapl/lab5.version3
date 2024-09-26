@@ -11,7 +11,7 @@ public class CommandManager {
     private final Set<Vehicle> vehicles;
     private final Deque<String> commandHistory;
     public CommandManager(VehiclesCollecton vehiclesCollecton, ConsoleReader consoleReader) {
-        this.commands = new HashMap<>(); //карта команд
+        this.commands = new HashMap<>();
         this.commandHistory = new LinkedList<>();
         this.vehicles = vehiclesCollecton.getVehicles() != null ? vehiclesCollecton.getVehicles() : new HashSet<>();
         registerCommands(vehiclesCollecton, consoleReader);
