@@ -9,6 +9,8 @@ public class History implements Command {
     public History(Deque<String> commandHistory) {
         this.commandHistory = commandHistory;
     }
+
+    // метод для вывода этой истории пользователю (не путаем с recordCommand)
     @Override
     public void execute(String argument){
         if (commandHistory.isEmpty()) {

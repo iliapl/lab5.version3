@@ -16,15 +16,13 @@ import java.io.File;
 import java.io.PrintWriter;
 
 public class WriteFileToXML {
-    EnvDoing envDoing = new EnvDoing();
     VehiclesCollecton collecton;
     private final PrintWriter printWriter;
-
     public WriteFileToXML(PrintWriter printWriter, VehiclesCollecton collecton) {
         this.printWriter = printWriter;
         this.collecton = collecton;
     }
-    public int toSaveToXML() throws ParserConfigurationException {
+    public void toSaveToXML() throws ParserConfigurationException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
@@ -34,26 +32,22 @@ public class WriteFileToXML {
         }
         doc.appendChild(orgElement);
         try {
-            if (saveDocumentToFile(doc) < 0) {
-                return -1;
-            }
+            saveDocumentToFile(doc);
         } catch (TransformerException e) {
             System.out.println("Ошибка трансформера" + '\n' + e.getLocalizedMessage());
         }
-        return 1;
     }
-    private int saveDocumentToFile(Document doc) throws TransformerException {
+    private void saveDocumentToFile(Document doc) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
-        File file = new File(envDoing.getPATHcollection());
+        File file = new File(new EnvDoing().getPATHcollection());
         if (!file.exists()) {
-            return -1;
+            return;
         }
         StreamResult result = new StreamResult(file);
         result.setWriter(printWriter);
         transformer.transform(source, result);
-        return 1;
     }
 
     private static Element toXmlElement(Vehicle vehicle, Document doc) {

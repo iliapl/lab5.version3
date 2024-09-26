@@ -1,8 +1,8 @@
 package util;
 
 import ReadFromConsole.ConsoleReader;
-import forCommands.CommandManager;
-import forCommands.ExecuteCommands;
+import forCommands.CommandProcessing.CommandManager;
+import forCommands.CommandProcessing.ExecuteCommands;
 import forFile.FileRead;
 import forVehicles.VehiclesCollecton;
 
@@ -38,30 +38,3 @@ public class Creatore {
         }
     }
 }
-
-/*
-scanner = new Scanner(System.in);
-        EnvDoing envDoing = new EnvDoing();
-        File file = new File(envDoing.getPATHcollection());
-        String string = file.getAbsolutePath();
-        FileInputStream fin;
-        try {
-            fin = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        BufferedInputStream bufferedReader = new BufferedInputStream(fin);
-        FileOutputStream fileOutputStream;
-        try {
-            fileOutputStream = new FileOutputStream(string, true);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        PrintWriter printWriter = new PrintWriter(fileOutputStream);
-        ConsoleReader consoleReader = new ConsoleReader(scanner);
-        FileRead fileRead = new FileRead(bufferedReader, scanner, file);
-        vehiclesCollecton = new VehiclesCollecton(fileRead.parserXML());
-        CommandManager commands = new CommandManager(vehiclesCollecton, consoleReader);
-        WriteFileToXML writeFileToXML = new WriteFileToXML(printWriter, vehiclesCollecton);
-        executeCommands = new ExecuteCommands(commands);
- */

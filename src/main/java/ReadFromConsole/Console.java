@@ -1,6 +1,6 @@
 package ReadFromConsole;
 
-import forCommands.ExecuteCommands;
+import forCommands.CommandProcessing.ExecuteCommands;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

@@ -2,10 +2,9 @@ package forVehicles;
 
 import lombok.Getter;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Vehicle implements Serializable,Comparable<Vehicle> {
+public class Vehicle implements Comparable<Vehicle> {
     @Getter
     private String name;
     private int id;

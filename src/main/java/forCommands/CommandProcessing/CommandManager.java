@@ -1,6 +1,7 @@
-package forCommands;
+package forCommands.CommandProcessing;
 
 import ReadFromConsole.ConsoleReader;
+import forCommands.Command;
 import forCommands.Commands.*;
 import forVehicles.Vehicle;
 import forVehicles.VehiclesCollecton;
@@ -10,6 +11,7 @@ public class CommandManager {
     private final Map<String, Command> commands;
     private final Set<Vehicle> vehicles;
     private final Deque<String> commandHistory;
+
     public CommandManager(VehiclesCollecton vehiclesCollecton, ConsoleReader consoleReader) {
         this.commands = new HashMap<>();
         this.commandHistory = new LinkedList<>();
@@ -35,6 +37,15 @@ public class CommandManager {
         commands.put("averageofenginepower", new AverageOfEnginePower(vehicles));
         commands.put("printuniquefueltype", new PrintUniqueFuelType(vehicles));
         commands.put("history", new History(commandHistory));
+    }
+
+    //метод для записи команд в историю
+    protected void recordCommand(String command) {
+        int maxHistorySize = 7;
+        if (commandHistory.size() >= maxHistorySize) {
+            commandHistory.pollFirst();
+        }
+        commandHistory.addLast(command);
     }
     public Command getCommand(String commandName) {
         return commands.get(commandName);

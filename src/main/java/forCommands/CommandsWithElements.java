@@ -18,7 +18,7 @@ public abstract class CommandsWithElements implements Command {
         this.consoleReader = consoleReader;
     }
 
-    /* getVehicle и readVehicleFromArguments позволят создать объекта Vehicle двумя способами:
+    /* getVehicle и readVehicleFromArguments позволяют создать объекта Vehicle двумя способами:
     1) через строковые аргументы, например add matt 1 2 3 1 1)
     2) "в интерактивном режиме" - т.е. поочередно
      */
