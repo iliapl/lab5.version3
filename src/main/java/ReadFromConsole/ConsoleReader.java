@@ -8,11 +8,10 @@ import forVehicles.VehicleType;
 import java.util.Scanner;
 
 public class ConsoleReader {
-    protected final Scanner scanner;
+    private final Scanner scanner;
     public ConsoleReader(Scanner scanner) {
         this.scanner = scanner;
     }
-
     public Vehicle readVehicleFromConsole() {
         String name = readNameFromConsole();
         Coordinates coordinates = readCoordinatesFromConsole();

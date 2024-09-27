@@ -33,15 +33,15 @@ public class CommandManager {
         commands.put("help", new Help());
         commands.put("info", new Info(vehicles));
         commands.put("show", new Show(vehicles));
-        commands.put("add", new Add(vehicles));
-        commands.put("updateid", new UpdateID(vehicles));
+        commands.put("add", new Add(vehicles, consoleReader));
+        commands.put("updateid", new UpdateID(vehicles, consoleReader));
         commands.put("removebyid", new RemoveByID(vehicles));
         commands.put("clear", new Clear(vehicles));
         commands.put("save", new Save(writeFileToXML, envDoing));
         commands.put("executescript", new ExecuteScript(new ExecuteCommands(this)));
         commands.put("exit", new Exit());
-        commands.put("addifmin", new AddIfMin(vehicles));
-        commands.put("removegreater", new RemoveGreater(vehicles));
+        commands.put("addifmin", new AddIfMin(vehicles, consoleReader));
+        commands.put("removegreater", new RemoveGreater(vehicles, consoleReader));
         commands.put("sumofenginepower", new SumOfEnginePower(vehicles));
         commands.put("averageofenginepower", new AverageOfEnginePower(vehicles));
         commands.put("printuniquefueltype", new PrintUniqueFuelType(vehicles));
@@ -56,7 +56,7 @@ public class CommandManager {
         }
         commandHistory.addLast(command);
     }
-    public Command getCommand(String commandName) {
+    protected Command getCommand(String commandName) {
         return commands.get(commandName);
     }
 }

@@ -11,7 +11,6 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Creatore {
-
     public Scanner scanner;
     public ExecuteCommands executeCommands;
     public VehiclesCollecton vehiclesCollecton;

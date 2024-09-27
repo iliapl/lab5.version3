@@ -3,6 +3,7 @@ package forCommands.Commands;
 import Utilities.EnvDoing;
 import forCommands.Command;
 import forFile.WriteFileToXML;
+import forVehicles.VehiclesCollecton;
 
 import javax.xml.parsers.ParserConfigurationException;
 

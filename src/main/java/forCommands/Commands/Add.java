@@ -1,13 +1,14 @@
 package forCommands.Commands;
 
+import ReadFromConsole.ConsoleReader;
 import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.Set;
 
 public final class Add extends CommandsWithElements implements Command {
-    public Add(Set<Vehicle> vehicles) {
-        super(vehicles);
+    public Add(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
+        super(vehicles,consoleReader);
     }
     @Override
     public void execute(String argument) {

@@ -12,9 +12,11 @@ import java.util.Set;
 public sealed class CommandsWithElements permits Add, AddIfMin, RemoveGreater, UpdateID {
     protected final Set<Vehicle> vehicles;
     protected ConsoleReader consoleReader;
-    public CommandsWithElements(Set<Vehicle> vehicles) {
+    public CommandsWithElements(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         this.vehicles = vehicles;
+        this.consoleReader = consoleReader;
     }
+
     /* getVehicle и readVehicleFromArguments позволяют создать объекта Vehicle двумя способами:
     1) через строковые аргументы, например add matt 1 2 3 1 1)
     2) "в интерактивном режиме" - т.е. поочередно
@@ -33,7 +35,7 @@ public sealed class CommandsWithElements permits Add, AddIfMin, RemoveGreater, U
     }
 
     //метод, позволяющий преобразовать аргументы из строки в объект Vehicle
-    protected Vehicle readVehicleFromArguments(String[] args) {
+    private Vehicle readVehicleFromArguments(String[] args) {
         if (args.length == 6) {
             try {
                 //извлекаем аргументы и сохраняем в соответствующие переменные

@@ -1,5 +1,6 @@
 package forCommands.Commands;
 
+import ReadFromConsole.ConsoleReader;
 import forCommands.Command;
 import forVehicles.Vehicle;
 
@@ -8,8 +9,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class AddIfMin extends CommandsWithElements implements Command {
-    public AddIfMin(Set<Vehicle> vehicles) {
-        super(vehicles);
+    public AddIfMin(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
+        super(vehicles, consoleReader);
     }
     @Override
     public void execute(String argument) {

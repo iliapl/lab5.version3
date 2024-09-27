@@ -1,13 +1,11 @@
 package forCommands.CommandProcessing;
-
 import forCommands.Command;
 
 import java.util.Set;
-
 public class ExecuteCommands {
-    private final CommandManager commands;
+    private final CommandManager commandManager;
     public ExecuteCommands(CommandManager commandManager) {
-        this.commands = commandManager;
+        this.commandManager = commandManager;
     }
 
     // метод для выполнения команд (+ обработка аргументов)
@@ -33,7 +31,7 @@ public class ExecuteCommands {
         2) Если аргументы есть, присваиваем их переменной argument. Если аргументов нет, присваиваем пустую строку ("").
          */
 
-        Command command = commands.getCommand(commandName);
+        Command command = commandManager.getCommand(commandName);
         if (command == null) {
             System.out.println("Команда не найдена: " + commandName);
             return false;
@@ -52,7 +50,7 @@ public class ExecuteCommands {
         command.execute(requiresArgument ? argument : "");
 
         // Запись команды в историю
-        commands.recordCommand(commandName);
+        commandManager.recordCommand(commandName);
         return false;
     }
 
