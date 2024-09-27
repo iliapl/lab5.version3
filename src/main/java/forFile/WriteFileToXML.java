@@ -4,7 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import forVehicles.Vehicle;
 import forVehicles.VehiclesCollecton;
-import util.EnvDoing;
+import Utilities.EnvDoing;
 
 import javax.xml.parsers.*;
 import javax.xml.transform.Transformer;
@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.PrintWriter;
 
 public class WriteFileToXML {
-    VehiclesCollecton collecton;
+    private final VehiclesCollecton collecton;
     private final PrintWriter printWriter;
     public WriteFileToXML(PrintWriter printWriter, VehiclesCollecton collecton) {
         this.printWriter = printWriter;
@@ -72,4 +72,3 @@ public class WriteFileToXML {
         return VehicleElement;
     }
 }
-

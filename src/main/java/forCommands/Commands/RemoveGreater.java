@@ -1,16 +1,13 @@
 package forCommands.Commands;
 
-import ReadFromConsole.ConsoleReader;
-import forCommands.CommandsWithElements;
+import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.Set;
-import java.util.Scanner;
 
-public class RemoveGreater extends CommandsWithElements {
-
-    public RemoveGreater(Set<Vehicle> vehicles, Scanner scanner, ConsoleReader consoleReader) {
-        super(vehicles, scanner, consoleReader);
+public final class RemoveGreater extends CommandsWithElements implements Command {
+    public RemoveGreater(Set<Vehicle> vehicles) {
+        super(vehicles);
     }
 
     @Override

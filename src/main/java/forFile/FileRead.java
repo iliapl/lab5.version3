@@ -15,17 +15,14 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class FileRead {
-    Document doc;
-    public Scanner scanner;
     public BufferedInputStream bufferedReaderin;
     public File file;
-    public FileRead(BufferedInputStream bufferedReader, Scanner scanner, File file) {
+    public FileRead(BufferedInputStream bufferedReader, File file) {
         this.bufferedReaderin = bufferedReader;
         this.file = file;
-        this.scanner = scanner;
     }
     public boolean canReadElements() {
-        if (new Filewas().canReadFile(file)) {
+        if (new FileExist().canReadFile(file)) {
             if (getFirstNode() != null) {
                 return true;
             } else {
@@ -126,7 +123,7 @@ public class FileRead {
 
     public Node getFirstNode() {
         try {
-            doc = buildDocument();
+            Document doc = buildDocument();
             return doc.getFirstChild();
         } catch (SAXException | IOException | ParserConfigurationException e) {
             System.out.println("Ошибка парсинга");

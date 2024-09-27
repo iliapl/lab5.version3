@@ -1,18 +1,14 @@
 package forCommands.Commands;
 
-import ReadFromConsole.ConsoleReader;
-import forCommands.CommandsWithElements;
+import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.Set;
-import java.util.Scanner;
 
-public class UpdateID extends CommandsWithElements {
-
-    public UpdateID(Set<Vehicle> vehicles, Scanner scanner, ConsoleReader consoleReader) {
-        super(vehicles, scanner, consoleReader);
+public final class UpdateID extends CommandsWithElements implements Command {
+    public UpdateID(Set<Vehicle> vehicles) {
+        super(vehicles);
     }
-
     @Override
     public void execute(String argument) {
         try {

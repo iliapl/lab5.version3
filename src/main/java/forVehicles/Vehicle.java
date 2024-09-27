@@ -51,18 +51,6 @@ public class Vehicle implements Comparable<Vehicle> {
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
-    @Override
-    public int hashCode() {
-        return id;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        Vehicle vehicle = (Vehicle) obj;
-        return (vehicle.id == this.id);
-    }
-
     public long getId() {
         return id;
     }
@@ -83,7 +71,13 @@ public class Vehicle implements Comparable<Vehicle> {
                 ", Type: " + type +
                 ", Fuel Type: " + fuelType;
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        Vehicle vehicle = (Vehicle) obj;
+        return (vehicle.id == this.id);
+    }
     @Override
     public int compareTo(Vehicle other) {
         return Integer.compare(this.enginePower, other.enginePower);

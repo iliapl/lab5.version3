@@ -1,4 +1,4 @@
-package util;
+package Utilities;
 
 public class EnvDoing {
     public String getPATHcollection() {

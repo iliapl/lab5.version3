@@ -1,8 +1,7 @@
 package forFile;
 
 import java.io.File;
-
-public class Filewas {
+public class FileExist {
     public boolean canReadFile(File file)  {
         if (file.exists()) {
             if (file.isDirectory() ) {

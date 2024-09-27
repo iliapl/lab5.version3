@@ -23,6 +23,7 @@ public class ExecuteScript implements Command {
         isExecutingScript = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
+            reader.close();
             if (line == null) {
                 System.out.println("Файл пуст, считывать с файла нечего.");
                 return;

@@ -8,8 +8,7 @@ import forVehicles.VehicleType;
 import java.util.Scanner;
 
 public class ConsoleReader {
-    private final Scanner scanner;
-
+    protected final Scanner scanner;
     public ConsoleReader(Scanner scanner) {
         this.scanner = scanner;
     }

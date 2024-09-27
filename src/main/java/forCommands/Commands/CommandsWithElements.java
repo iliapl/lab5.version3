@@ -1,23 +1,20 @@
-package forCommands;
+
+package forCommands.Commands;
 
 import ReadFromConsole.ConsoleReader;
 import forVehicles.Coordinates;
 import forVehicles.FuelType;
 import forVehicles.Vehicle;
 import forVehicles.VehicleType;
-import java.util.Scanner;
+
 import java.util.Set;
 
-public abstract class CommandsWithElements implements Command {
+public sealed class CommandsWithElements permits Add, AddIfMin, RemoveGreater, UpdateID {
     protected final Set<Vehicle> vehicles;
-    protected final Scanner scanner;
-    protected final ConsoleReader consoleReader;
-    public CommandsWithElements(Set<Vehicle> vehicles, Scanner scanner, ConsoleReader consoleReader) {
+    protected ConsoleReader consoleReader;
+    public CommandsWithElements(Set<Vehicle> vehicles) {
         this.vehicles = vehicles;
-        this.scanner = scanner;
-        this.consoleReader = consoleReader;
     }
-
     /* getVehicle и readVehicleFromArguments позволяют создать объекта Vehicle двумя способами:
     1) через строковые аргументы, например add matt 1 2 3 1 1)
     2) "в интерактивном режиме" - т.е. поочередно

@@ -1,20 +1,16 @@
 package forCommands.Commands;
 
-import ReadFromConsole.ConsoleReader;
-import forCommands.CommandsWithElements;
+import forCommands.Command;
 import forVehicles.Vehicle;
 
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
-import java.util.Scanner;
 
-public class AddIfMin extends CommandsWithElements {
-
-    public AddIfMin(Set<Vehicle> vehicles, Scanner scanner, ConsoleReader consoleReader) {
-        super(vehicles, scanner, consoleReader);
+public final class AddIfMin extends CommandsWithElements implements Command {
+    public AddIfMin(Set<Vehicle> vehicles) {
+        super(vehicles);
     }
-
     @Override
     public void execute(String argument) {
         Vehicle newVehicle = getVehicle(argument);
