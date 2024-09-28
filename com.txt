@@ -1,2 +1,10 @@
-executescript com.txt
+clear
+add Matt 1 2 3 4 5
+add Il 10 20 30 2 2
+addifmin ALISE 234 345 6 1 2
+ADDIFMIN AGATA 25 245 1 1 1
+DFGKH
+sumofenginepower
+save
+exit
 show

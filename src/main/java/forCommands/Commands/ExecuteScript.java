@@ -6,10 +6,10 @@ import forCommands.CommandProcessing.ExecuteCommands;
 import java.io.*;
 
 public class ExecuteScript implements Command {
-    private final ExecuteCommands commands;
+    private final ExecuteCommands executeCommands;
     private boolean isExecutingScript = false;  // Флаг выполнения скрипта
-    public ExecuteScript(ExecuteCommands commands) {
-        this.commands = commands;
+    public ExecuteScript(ExecuteCommands executeCommands) {
+        this.executeCommands = executeCommands;
     }
     @Override
     public void execute(String argument) {
@@ -23,14 +23,13 @@ public class ExecuteScript implements Command {
         isExecutingScript = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
-            reader.close();
             if (line == null) {
                 System.out.println("Файл пуст, считывать с файла нечего.");
                 return;
             }
             while (line != null) {
                 System.out.println("Выполняем команду: " + line);
-                commands.executeCommand(line);
+                executeCommands.executeCommand(line);
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {

@@ -37,7 +37,10 @@ public final class UpdateID extends CommandsWithElements implements Command {
 
             // Обновляем объект, если данные введены корректно
             if (updatedVehicle != null) {
-                vehicleToUpdate.update(updatedVehicle);  // Обновляем объект
+                vehicleToUpdate.setName(updatedVehicle.getName());
+                vehicleToUpdate.setCoordinates(updatedVehicle.getCoordinates());
+                vehicleToUpdate.setType(updatedVehicle.getType());
+                vehicleToUpdate.setFuelType(updatedVehicle.getFuelType());
                 System.out.println("Транспорт с ID " + id + " был обновлён.");
             } else {
                 System.out.println("Ошибка при обновлении транспорта.");

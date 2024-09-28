@@ -15,24 +15,11 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class FileRead {
-    public BufferedInputStream bufferedReaderin;
+    public BufferedInputStream bufferedInputStream;
     public File file;
-    public FileRead(BufferedInputStream bufferedReader, File file) {
-        this.bufferedReaderin = bufferedReader;
+    public FileRead(BufferedInputStream bufferedInputStream, File file) {
+        this.bufferedInputStream = bufferedInputStream;
         this.file = file;
-    }
-    public boolean canReadElements() {
-        if (new FileExist().canReadFile(file)) {
-            if (getFirstNode() != null) {
-                return true;
-            } else {
-                System.out.println("Файл не содержит элементов");
-                return false;
-            }
-        } else {
-            System.out.println("Парсинг не может быть выполнен");
-            return false;
-        }
     }
     public HashSet<Vehicle> parserXML() {
         if (canReadElements()) {
@@ -44,6 +31,7 @@ public class FileRead {
             int enginePower = 0;
             VehicleType type = null;
             FuelType fuelType = null;
+            long maxId = 0;  // Новый счётчик для поиска максимального ID
             NodeList nodeList = getNodes();
             for (int i = 0; i < getNodes().getLength(); i++) {
                 if (getNodes().item(i).getNodeType() != Node.ELEMENT_NODE) {
@@ -58,6 +46,7 @@ public class FileRead {
                         switch (elements.item(co).getNodeName()) {
                             case "id": {
                                 id = Long.parseLong(elements.item(co).getTextContent());
+                                maxId = Math.max(maxId, id);  // Обновляем maxId
                                 break;
                             }
                             case "name": {
@@ -109,19 +98,33 @@ public class FileRead {
                 vehicle.setCreationDate(creationDate);
                 vehicles.add(vehicle);
             }
+            Vehicle.setNextId((int) (maxId + 1)); // Устанавливаем nextId как maxId + 1
             return vehicles;
         } else {
             HashSet<Vehicle> vehicles = new HashSet<>();
             return vehicles;
         }
     }
+    private boolean canReadElements() {
+        if (new FileExist().canReadFile(file)) {
+            if (getFirstNode() != null) {
+                return true;
+            } else {
+                System.out.println("Файл не содержит элементов");
+                return false;
+            }
+        } else {
+            System.out.println("Парсинг не может быть выполнен");
+            return false;
+        }
+    }
 
-    public Document buildDocument() throws SAXException, IOException, ParserConfigurationException {
+    private Document buildDocument() throws SAXException, IOException, ParserConfigurationException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         return docFactory.newDocumentBuilder().parse(file);
     }
 
-    public Node getFirstNode() {
+    private Node getFirstNode() {
         try {
             Document doc = buildDocument();
             return doc.getFirstChild();
@@ -131,7 +134,7 @@ public class FileRead {
         }
     }
 
-    public NodeList getNodes() {
+    private NodeList getNodes() {
         return getFirstNode().getChildNodes();
     }
 }

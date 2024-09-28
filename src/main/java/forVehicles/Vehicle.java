@@ -1,22 +1,16 @@
 package forVehicles;
 
 import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDate;
-
+@Getter @Setter
 public class Vehicle implements Comparable<Vehicle> {
-    @Getter
     private String name;
     private int id;
-    @Getter
     private Coordinates coordinates;
-    @Getter
     private java.time.LocalDate creationDate;
-    @Getter
     private final Integer enginePower;
-    @Getter
     private VehicleType type;
-    @Getter
     private FuelType fuelType;
     private static int nextid = 0;
 
@@ -44,22 +38,8 @@ public class Vehicle implements Comparable<Vehicle> {
         this.type = type;
         this.fuelType = fuelType;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-    public long getId() {
-        return id;
-    }
-
-    public void update(Vehicle vehicle) {
-        name = vehicle.name;
-        coordinates = vehicle.coordinates;
-        type = vehicle.type;
-        fuelType = vehicle.fuelType;
+    public static void setNextId(int nextid) {
+        Vehicle.nextid = nextid;
     }
 
     public String vehicleToString() {
