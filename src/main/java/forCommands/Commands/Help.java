@@ -4,7 +4,7 @@ import forCommands.Command;
 
 public class Help implements Command {
     @Override
-    public void execute(String argument){
+    public void execute(String argument) {
         System.out.println("info: Выводит информацию о коллекции");
         System.out.println("show: Выводит все элементы коллекции");
         System.out.println("add: Добавляет элемент в коллекцию");

@@ -5,9 +5,10 @@ import lombok.Getter;
 import java.util.HashSet;
 
 @Getter
-public class VehiclesCollecton {
+public class VehiclesCollection {
     private final HashSet<Vehicle> vehicles;
-    public VehiclesCollecton(HashSet<Vehicle> vehicles) {
+
+    public VehiclesCollection(HashSet<Vehicle> vehicles) {
         this.vehicles = vehicles;
         this.vehicles.addAll(vehicles);
     }

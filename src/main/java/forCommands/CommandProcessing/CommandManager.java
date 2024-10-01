@@ -1,13 +1,13 @@
 package forCommands.CommandProcessing;
 
 import ReadFromConsole.ConsoleReader;
-import Utilities.EnvDoing;
 import forCommands.Commands.Add;
 import forCommands.Command;
 import forCommands.Commands.*;
 import forFile.WriteFileToXML;
 import forVehicles.Vehicle;
-import forVehicles.VehiclesCollecton;
+import forVehicles.VehiclesCollection;
+
 import java.util.*;
 
 public class CommandManager {
@@ -15,16 +15,14 @@ public class CommandManager {
     private final Set<Vehicle> vehicles;
     private final Deque<String> commandHistory;
     private final WriteFileToXML writeFileToXML;
-    private final EnvDoing envDoing;
     private final ConsoleReader consoleReader;
 
-    public CommandManager(VehiclesCollecton vehiclesCollecton, ConsoleReader consoleReader, WriteFileToXML writeFileToXML, EnvDoing envDoing) {
+    public CommandManager(VehiclesCollection vehiclesCollection, ConsoleReader consoleReader, WriteFileToXML writeFileToXML) {
         this.commands = new HashMap<>();
         this.commandHistory = new LinkedList<>();
         this.writeFileToXML = writeFileToXML;
         this.consoleReader = consoleReader;
-        this.envDoing = envDoing;
-        this.vehicles = vehiclesCollecton.getVehicles() != null ? vehiclesCollecton.getVehicles() : new HashSet<>();
+        this.vehicles = vehiclesCollection.getVehicles() != null ? vehiclesCollection.getVehicles() : new HashSet<>();
         registerCommands();
     }
 
@@ -37,7 +35,7 @@ public class CommandManager {
         commands.put("updateid", new UpdateID(vehicles, consoleReader));
         commands.put("removebyid", new RemoveByID(vehicles));
         commands.put("clear", new Clear(vehicles));
-        commands.put("save", new Save(writeFileToXML, envDoing));
+        commands.put("save", new Save(writeFileToXML));
         commands.put("executescript", new ExecuteScript(new ExecuteCommands(this)));
         commands.put("exit", new Exit());
         commands.put("addifmin", new AddIfMin(vehicles, consoleReader));
@@ -48,7 +46,6 @@ public class CommandManager {
         commands.put("history", new History(commandHistory));
     }
 
-    //метод для записи команд в историю
     protected void recordCommand(String command) {
         int maxHistorySize = 7;
         if (commandHistory.size() >= maxHistorySize) {
@@ -56,6 +53,7 @@ public class CommandManager {
         }
         commandHistory.addLast(command);
     }
+
     protected Command getCommand(String commandName) {
         return commands.get(commandName);
     }

@@ -2,16 +2,16 @@ package forCommands.Commands;
 
 import forCommands.Command;
 import forVehicles.Vehicle;
+import lombok.AllArgsConstructor;
 
 import java.util.Set;
 
+@AllArgsConstructor
 public class RemoveByID implements Command {
     private final Set<Vehicle> vehicles;
-    public RemoveByID(Set<Vehicle> vehicles){
-        this.vehicles = vehicles;
-    }
+
     @Override
-    public void execute(String argument){
+    public void execute(String argument) {
         try {
             int id = Integer.parseInt(argument.trim());
             boolean removed = vehicles.removeIf(vehicle -> vehicle.getId() == id);

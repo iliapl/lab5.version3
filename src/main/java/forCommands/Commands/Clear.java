@@ -2,16 +2,15 @@ package forCommands.Commands;
 
 import forCommands.Command;
 import forVehicles.Vehicle;
+import lombok.AllArgsConstructor;
 
 import java.util.Set;
-
+@AllArgsConstructor
 public class Clear implements Command {
     private final Set<Vehicle> vehicles;
-    public Clear(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
+
     @Override
-    public void execute(String argument){
+    public void execute(String argument) {
         if (vehicles.isEmpty()) {
             System.out.println("Коллекция уже пустая, нечего очищать.");
             return;

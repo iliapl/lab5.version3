@@ -12,6 +12,7 @@ public final class AddIfMin extends CommandsWithElements implements Command {
     public AddIfMin(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         super(vehicles, consoleReader);
     }
+
     @Override
     public void execute(String argument) {
         Vehicle newVehicle = getVehicle(argument);
@@ -19,7 +20,6 @@ public final class AddIfMin extends CommandsWithElements implements Command {
             Optional<Vehicle> minVehicle = vehicles.stream().min(Comparator.comparingInt(Vehicle::getEnginePower));
             if (minVehicle.isPresent()) {
                 int minEnginePower = minVehicle.get().getEnginePower();
-                // Добавляем, если enginePower нового объекта меньше минимального
                 if (newVehicle.getEnginePower() < minEnginePower) {
                     vehicles.add(newVehicle);
                     System.out.println("Добавлен новый элемент, так как его enginePower меньше, чем у наименьшего элемента.");
@@ -27,7 +27,6 @@ public final class AddIfMin extends CommandsWithElements implements Command {
                     System.out.println("Новый элемент не добавлен, так как его enginePower не меньше минимального.");
                 }
             } else {
-                // Если коллекция пуста, добавляем элемент
                 vehicles.add(newVehicle);
                 System.out.println("Коллекция пуста. Добавлен первый элемент.");
             }

@@ -2,14 +2,14 @@ package forCommands.Commands;
 
 import forCommands.Command;
 import forVehicles.Vehicle;
+import lombok.AllArgsConstructor;
 
 import java.util.Set;
 
+@AllArgsConstructor
 public class AverageOfEnginePower implements Command {
     private final Set<Vehicle> vehicles;
-    public AverageOfEnginePower(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
+
     @Override
     public void execute(String argument) {
         try {

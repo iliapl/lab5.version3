@@ -1,27 +1,19 @@
 package forCommands.Commands;
 
-import Utilities.EnvDoing;
 import forCommands.Command;
 import forFile.WriteFileToXML;
-import forVehicles.VehiclesCollecton;
+import lombok.AllArgsConstructor;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import static Utilities.EnvDoing.getPATHcollection;
+
+@AllArgsConstructor
 public class Save implements Command {
-    private final EnvDoing envDoing;
     private final WriteFileToXML writeFileToXML;
-    public Save (WriteFileToXML writeFileToXML, EnvDoing envDoing) {
-        this.writeFileToXML = writeFileToXML;
-        this.envDoing = envDoing;
-    }
 
     @Override
     public void execute(String argument) {
-        String filePath = envDoing.getPATHcollection();
-        if (filePath == null) {
-            System.out.println("Неверно указан путь к файлу");
-            return;
-        }
         try {
             writeFileToXML.toSaveToXML();
             System.out.println("Коллекция успешно сохранена в файл.");

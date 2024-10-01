@@ -1,12 +1,12 @@
 import ReadFromConsole.Console;
-import Utilities.Creatore;
+import Utilities.Creator;
 
 public class Client {
     public static void main(String[] args){
         System.out.println("гоу-гоу");
-        Creatore creatore = new Creatore();
-        creatore.create();
-        Console console = new Console(creatore.executeCommands, creatore.scanner);
+        Creator creator = new Creator();
+        creator.create();
+        Console console = new Console(creator.scanner, creator.executeCommands);
         console.start();
     }
 }

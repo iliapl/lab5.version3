@@ -3,17 +3,17 @@ package forCommands.Commands;
 import forCommands.Command;
 import forVehicles.FuelType;
 import forVehicles.Vehicle;
+import lombok.AllArgsConstructor;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 public class PrintUniqueFuelType implements Command {
     private final Set<Vehicle> vehicles;
-    public PrintUniqueFuelType(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
+
     @Override
-    public void execute(String argument){
+    public void execute(String argument) {
         if (vehicles.isEmpty()) {
             System.out.println("Коллекция пуста. Нет уникальных значений fuelType.");
             return;

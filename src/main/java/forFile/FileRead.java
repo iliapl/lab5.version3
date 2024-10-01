@@ -1,5 +1,6 @@
 package forFile;
 
+import lombok.AllArgsConstructor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -14,13 +15,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-public class FileRead {
+@AllArgsConstructor
+public class FileRead implements FileExist{
     public BufferedInputStream bufferedInputStream;
-    public File file;
-    public FileRead(BufferedInputStream bufferedInputStream, File file) {
-        this.bufferedInputStream = bufferedInputStream;
-        this.file = file;
-    }
+    private final File file;
+
     public HashSet<Vehicle> parserXML() {
         if (canReadElements()) {
             HashSet<Vehicle> vehicles = new HashSet<>(); //наш исходный хашс он здесь объявл впервые
@@ -44,51 +43,28 @@ public class FileRead {
                 for (int co = 0; co < elements.getLength(); co++) {
                     if (elements.item(co).getNodeType() == Node.ELEMENT_NODE) {
                         switch (elements.item(co).getNodeName()) {
-                            case "id": {
+                            case "id" -> {
                                 id = Long.parseLong(elements.item(co).getTextContent());
                                 maxId = Math.max(maxId, id);  // Обновляем maxId
-                                break;
                             }
-                            case "name": {
-                                name = elements.item(co).getTextContent();
-                                break;
-                            }
-                            case "creationDate": {
-                                creationDate = LocalDate.parse(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "enginePower": {
-                                enginePower = Integer.parseInt(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "type": {
-                                type = VehicleType.valueOf(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "fuelType": {
-                                fuelType = FuelType.valueOf(elements.item(co).getTextContent());
-                                break;
-                            }
-                            case "coordinates":{
+                            case "name" -> name = elements.item(co).getTextContent();
+                            case "creationDate" -> creationDate = LocalDate.parse(elements.item(co).getTextContent());
+                            case "enginePower" -> enginePower = Integer.parseInt(elements.item(co).getTextContent());
+                            case "type" -> type = VehicleType.valueOf(elements.item(co).getTextContent());
+                            case "fuelType" -> fuelType = FuelType.valueOf(elements.item(co).getTextContent());
+                            case "coordinates" -> {
                                 NodeList nodeCoordinates = elements.item(co).getChildNodes();
                                 long x = 0;
                                 float y = 0;
                                 for (int h = 0; h < nodeCoordinates.getLength(); h++) {
                                     if (nodeCoordinates.item(h).getNodeType() == Node.ELEMENT_NODE) {
                                         switch (nodeCoordinates.item(h).getNodeName()) {
-                                            case "x": {
-                                                x = Long.parseLong(nodeCoordinates.item(h).getTextContent());
-                                                break;
-                                            }
-                                            case "y": {
-                                                y = Float.parseFloat(nodeCoordinates.item(h).getTextContent());
-                                                break;
-                                            }
+                                            case "x" -> x = Long.parseLong(nodeCoordinates.item(h).getTextContent());
+                                            case "y" -> y = Float.parseFloat(nodeCoordinates.item(h).getTextContent());
                                         }
                                     }
                                 }
-                                coordinates = new Coordinates(x,y);
-                                break;
+                                coordinates = new Coordinates(x, y);
                             }
                         }
                     }
@@ -105,8 +81,9 @@ public class FileRead {
             return vehicles;
         }
     }
+
     private boolean canReadElements() {
-        if (new FileExist().canReadFile(file)) {
+        if (canReadFile(file)) {
             if (getFirstNode() != null) {
                 return true;
             } else {

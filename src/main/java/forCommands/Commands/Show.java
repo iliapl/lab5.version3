@@ -2,16 +2,16 @@ package forCommands.Commands;
 
 import forCommands.Command;
 import forVehicles.Vehicle;
+import lombok.AllArgsConstructor;
 
 import java.util.Set;
 
+@AllArgsConstructor
 public class Show implements Command {
     private final Set<Vehicle> vehicles;
-    public Show (Set<Vehicle> vehicles){
-        this.vehicles = vehicles;
-    }
+
     @Override
-    public void execute(String argument){
+    public void execute(String argument) {
         if (vehicles.isEmpty()) {
             System.out.println("Коллекция пуста.");
             return;
@@ -19,6 +19,6 @@ public class Show implements Command {
         System.out.println("Элементы коллекции (отсортированные по engine power):");
         vehicles.stream()
                 .sorted()
-                .forEach(vehicle -> System.out.println(vehicle.vehicleToString()));
+                .forEach(vehicle -> System.out.println(vehicle.toString()));
     }
 }

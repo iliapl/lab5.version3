@@ -1,9 +1,10 @@
 package forFile;
 
+import lombok.AllArgsConstructor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import forVehicles.Vehicle;
-import forVehicles.VehiclesCollecton;
+import forVehicles.VehiclesCollection;
 import Utilities.EnvDoing;
 
 import javax.xml.parsers.*;
@@ -16,19 +17,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@AllArgsConstructor
 public class WriteFileToXML {
-    VehiclesCollecton collecton;
-    PrintWriter printWriter;
-    public WriteFileToXML(PrintWriter printWriter, VehiclesCollecton collecton) {
-        this.printWriter = printWriter;
-        this.collecton = collecton;
-    }
+    public final PrintWriter printWriter;
+    private final VehiclesCollection vehiclesCollection;
+
     public void toSaveToXML() throws ParserConfigurationException {
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         Document doc = docBuilder.newDocument();
         Element orgElement = doc.createElement("Vehicles");
-        for (Vehicle vehicle : collecton.getVehicles()) {
+        for (Vehicle vehicle : vehiclesCollection.getVehicles()) {
             orgElement.appendChild(WriteFileToXML.toXmlElement(vehicle, doc));
         }
         doc.appendChild(orgElement);
@@ -38,13 +37,14 @@ public class WriteFileToXML {
             System.out.println("Ошибка трансформера" + '\n' + e.getLocalizedMessage());
         }
     }
+
     private void saveDocumentToFile(Document doc) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
 
         // Получаем путь к файлу
-        File file = new File(new EnvDoing().getPATHcollection());
+        File file = new File(EnvDoing.getPATHcollection());
 
         // Проверяем, существует ли файл
         if (!file.exists()) {
@@ -78,7 +78,7 @@ public class WriteFileToXML {
         VehicleElement.appendChild(doc.createElement("enginePower"));
         VehicleElement.getChildNodes().item(4).setTextContent(String.valueOf(vehicle.getEnginePower()));
         VehicleElement.appendChild(doc.createElement("type"));
-        VehicleElement.getChildNodes().item(5).setTextContent(String.valueOf(vehicle.getType()));
+        VehicleElement.getChildNodes().item(5).setTextContent(String.valueOf(vehicle.getVehicleType()));
         VehicleElement.appendChild(doc.createElement("fuelType"));
         VehicleElement.getChildNodes().item(6).setTextContent(vehicle.getFuelType().name());
         return VehicleElement;

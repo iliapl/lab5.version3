@@ -2,15 +2,15 @@ package forCommands.Commands;
 
 import forCommands.Command;
 import forCommands.CommandProcessing.ExecuteCommands;
+import lombok.RequiredArgsConstructor;
 
 import java.io.*;
 
+@RequiredArgsConstructor
 public class ExecuteScript implements Command {
     private final ExecuteCommands executeCommands;
     private boolean isExecutingScript = false;  // Флаг выполнения скрипта
-    public ExecuteScript(ExecuteCommands executeCommands) {
-        this.executeCommands = executeCommands;
-    }
+
     @Override
     public void execute(String argument) {
         File file = new File(argument);

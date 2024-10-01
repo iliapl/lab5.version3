@@ -10,6 +10,7 @@ public final class UpdateID extends CommandsWithElements implements Command {
     public UpdateID(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
         super(vehicles, consoleReader);
     }
+
     @Override
     public void execute(String argument) {
         try {
@@ -39,7 +40,7 @@ public final class UpdateID extends CommandsWithElements implements Command {
             if (updatedVehicle != null) {
                 vehicleToUpdate.setName(updatedVehicle.getName());
                 vehicleToUpdate.setCoordinates(updatedVehicle.getCoordinates());
-                vehicleToUpdate.setType(updatedVehicle.getType());
+                vehicleToUpdate.setVehicleType(updatedVehicle.getVehicleType());
                 vehicleToUpdate.setFuelType(updatedVehicle.getFuelType());
                 System.out.println("Транспорт с ID " + id + " был обновлён.");
             } else {

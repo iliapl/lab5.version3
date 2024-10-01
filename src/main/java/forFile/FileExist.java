@@ -1,8 +1,8 @@
 package forFile;
 
 import java.io.File;
-public class FileExist {
-    protected boolean canReadFile(File file)  {
+public interface FileExist {
+    default boolean canReadFile(File file)  {
         if (file.exists()) {
             if (file.isDirectory() ) {
                 System.out.println("Файл не может быть считан. Причина: файл является папкой");

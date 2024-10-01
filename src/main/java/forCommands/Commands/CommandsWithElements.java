@@ -6,23 +6,21 @@ import forVehicles.Coordinates;
 import forVehicles.FuelType;
 import forVehicles.Vehicle;
 import forVehicles.VehicleType;
+import lombok.AllArgsConstructor;
 
 import java.util.Set;
 
+@AllArgsConstructor
 public sealed class CommandsWithElements permits Add, AddIfMin, RemoveGreater, UpdateID {
-    protected final Set<Vehicle> vehicles;
-    protected ConsoleReader consoleReader;
-    public CommandsWithElements(Set<Vehicle> vehicles, ConsoleReader consoleReader) {
-        this.vehicles = vehicles;
-        this.consoleReader = consoleReader;
-    }
+    protected final Set<Vehicle> vehicles; //protected, так как поле используется в классах-наследниках
+    private final ConsoleReader consoleReader;
 
     /* getVehicle и readVehicleFromArguments позволяют создать объекта Vehicle двумя способами:
     1) через строковые аргументы, например add matt 1 2 3 1 1)
     2) "в интерактивном режиме" - т.е. поочередно
      */
 
-    //метод, позволяющий выбрать способ создания объекта
+    //метод, позволяющий выбрать способ создания объекта (аналогично - use protected)
     protected Vehicle getVehicle(String argument) {
         Vehicle newVehicle;
         if (!argument.isEmpty()) {
@@ -45,7 +43,6 @@ public sealed class CommandsWithElements permits Add, AddIfMin, RemoveGreater, U
                 int enginePower = Integer.parseInt(args[3]);
                 int vehicleTypeOrdinal = Integer.parseInt(args[4]);
                 int fuelTypeOrdinal = Integer.parseInt(args[5]);
-
                 Coordinates coordinates = new Coordinates(x, y);
                 VehicleType vehicleType = VehicleType.values()[vehicleTypeOrdinal]; //чтобы выбрать значения из enum
                 FuelType fuelType = FuelType.values()[fuelTypeOrdinal];

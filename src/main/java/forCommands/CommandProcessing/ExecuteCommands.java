@@ -1,9 +1,12 @@
 package forCommands.CommandProcessing;
+
 import forCommands.Command;
 
 import java.util.Set;
+
 public class ExecuteCommands {
     private final CommandManager commandManager;
+
     public ExecuteCommands(CommandManager commandManager) {
         this.commandManager = commandManager;
     }
@@ -12,7 +15,8 @@ public class ExecuteCommands {
     public boolean executeCommand(String inputLine) {
         String[] parts = inputLine.trim().split(" ", 2);
 
-        /* Разбиваем строку inputLine на две части:
+        /*
+        Разбиваем строку inputLine на две части:
         parts[0] — название команды, parts[1] - аргумент команды (если есть)
         trim ()- удаление пробелов в начале и в конце строки
         split(" ", 2) - строка разбивается на не более чем 2 части
@@ -20,7 +24,8 @@ public class ExecuteCommands {
 
         String commandName = parts[0].toLowerCase();
 
-        /* Присваиваем переменной commandName название команды в нижнем регистре
+        /*
+        Присваиваем переменной commandName название команды в нижнем регистре
         при помощи toLowerCase(). Пример: Add, add, ADD обрабатываются одинаково).
          */
 
